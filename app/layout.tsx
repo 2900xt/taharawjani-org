@@ -14,13 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div className="system-container">
-        <body>
+      <body>
+        <div className="system-container">
           <MenuBar />
           {children}
-        </body>
-      </div>
-      <Analytics />
+        </div>
+        <Analytics />
+      </body>
     </html>
   );
 }
