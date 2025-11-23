@@ -1,5 +1,6 @@
-import SystemContainer from '../components/SystemContainer'
+import DesktopContainer from '@/components/DesktopContainer'
 
 export default function Home() {
-  return <SystemContainer />
+  return <DesktopContainer />;
+
 }
