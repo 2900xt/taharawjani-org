@@ -1,10 +1,11 @@
 import MenuBar from "@/components/MenuBar";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata = {
-  title: "Taha Rawjani - Portfolio",
-  description: "Taha Rawjani - Software Engineer Portfolio",
+  title: "ahat",
+  description: "ahat's home",
 };
 
 export default function RootLayout({
@@ -17,7 +18,11 @@ export default function RootLayout({
       <body>
         <div className="system-container">
           <MenuBar />
-          {children}
+          <div className="desktop-container">
+            <Sidebar side="left" />
+            <div className="main-content">{children}</div>
+            <Sidebar side="right" />
+          </div>
         </div>
         <Analytics />
       </body>
