@@ -1,68 +1,419 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'VT323', monospace;
 }
 
-@layer base {
-  * {
-    @apply border-border;
+body {
+  background-color: #2d1b69;
+  color: #000;
+  line-height: 1.2;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.system-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: #4a3586;
+  border: 2px solid #000;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.menu-bar {
+  display: flex;
+  background-color: #fff;
+  border-bottom: 2px solid #000;
+  padding: 5px 10px;
+  font-size: 18px;
+  justify-content: space-between;
+}
+
+.menu-items {
+  display: flex;
+  gap: 15px;
+}
+
+.time-display {
+  font-weight: bold;
+}
+
+.desktop-container {
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  min-height: 500px;
+}
+
+.sidebar {
+  background-color: #5a4b9d;
+  border-right: 2px solid #000;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid #000;
+}
+
+.contact-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.contact-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.contact-icon:hover {
+  opacity: 0.7;
+}
+
+.contact-icon span {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.icon.small {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.sidebar.right {
+  border-right: none;
+  border-left: 2px solid #000;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  font-size: 24px;
+}
+
+.main-content {
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.window {
+  width: 100%;
+  border: 2px solid #000;
+  margin-bottom: 20px;
+}
+
+.window-title {
+  background-color: #000;
+  color: #fff;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 18px;
+  border-bottom: 2px solid #000;
+}
+
+.tab-container {
+  display: flex;
+  border-bottom: 2px solid #000;
+}
+
+.tab {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-right: 2px solid #000;
+  background-color: #6a5acd;
+  color: #fff;
+}
+
+.tab.active {
+  background-color: #fff;
+  color: #000;
+  border-bottom: 2px solid #fff;
+  margin-bottom: -2px;
+}
+
+.window-content {
+  padding: 15px;
+  display: block;
+}
+
+.graph-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.graph {
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+.graph-title {
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.graph-visual {
+  height: 100px;
+  border: 2px solid #000;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+}
+
+.graph-bar {
+  flex: 1;
+  background-color: #7b68ee;
+  transition: height 0.2s ease;
+  align-self: flex-end;
+  min-width: 4px;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.stats-box {
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+.stats-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+  border-bottom: 1px solid #000;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.stats-label {
+  font-weight: bold;
+}
+
+.projects-list, .skills-list, .contact-form {
+  width: 100%;
+}
+
+.project-item, .skill-item {
+  border: 2px solid #000;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.project-title, .skill-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #8a7cc8;
+  border: 2px solid #000;
+  margin-top: 5px;
+}
+
+.skill-progress {
+  height: 100%;
+  background-color: #000;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #000;
+  background-color: #fff;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+button {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #7b68ee;
+}
+
+button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+a {
+  color: #9370db;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .desktop-container {
+    grid-template-columns: 1fr;
   }
-  body {
-    @apply bg-background text-foreground;
+  
+  .sidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-right: none;
+    border-bottom: 2px solid #000;
+    padding: 10px;
+  }
+  
+  .sidebar.left {
+    order: 1;
+    border-bottom: 2px solid #000;
+  }
+  
+  .sidebar.right {
+    order: 3;
+    border-top: 2px solid #000;
+    border-left: none;
+  }
+  
+  .main-content {
+    order: 2;
+    width: 100%;
+  }
+  
+  .icon-container {
+    margin: 0 10px;
+  }
+  
+  .graph-container, 
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .window {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .projects-list,
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project-item,
+  .skill-item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .contact-form {
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  input, 
+  textarea {
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .tab-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tab {
+    flex-grow: 1;
+    text-align: center;
+    border-bottom: 2px solid #000;
+  }
+  
+  .stats-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .stats-label {
+    margin-bottom: 5px;
   }
 }
