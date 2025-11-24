@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import Terminal from "../Terminal";
 
 export default function AboutWindow() {
   const [activeTab, setActiveTab] = useState("applications");
@@ -46,10 +47,10 @@ export default function AboutWindow() {
           Processes
         </div>
         <div
-          className={`tab ${activeTab === "monitor" ? "active" : ""}`}
-          onClick={() => setActiveTab("monitor")}
+          className={`tab ${activeTab === "terminal" ? "active" : ""}`}
+          onClick={() => setActiveTab("terminal")}
         >
-          Monitor
+          Terminal
         </div>
       </div>
 
@@ -181,52 +182,8 @@ export default function AboutWindow() {
         </div>
       )}
 
-      {activeTab === "monitor" && (
-        <div className="window-content active">
-          <div
-            className="stats-box"
-            style={{ width: "100%", marginBottom: "15px" }}
-          >
-            <div className="stats-title">System Information</div>
-            <div className="stats-row">
-              <div className="stats-label">Operating System:</div>
-              <div>Arch Linux :D</div>
-            </div>
-            <div className="stats-row">
-              <div className="stats-label">Primary Languages:</div>
-              <div>C++, Python, Javascript</div>
-            </div>
-            <div className="stats-row">
-              <div className="stats-label">Secondary Languages:</div>
-              <div>C, Java, C#</div>
-            </div>
-            <div className="stats-row">
-              <div className="stats-label">System Uptime:</div>
-              <div>17.5 years</div>
-            </div>
-          </div>
+      {activeTab === "terminal" && <Terminal />}
 
-          <div className="stats-box" style={{ width: "100%" }}>
-            <div className="stats-title">Personal Information</div>
-            <div className="stats-row">
-              <div className="stats-label">Location:</div>
-              <div>Leesburg, VA</div>
-            </div>
-            <div className="stats-row">
-              <div className="stats-label">Interests:</div>
-              <div>Competitive Programming, AI, OS Development</div>
-            </div>
-            <div className="stats-row">
-              <div className="stats-label">Languages:</div>
-              <div>English, Urdu, Spanish, Arabic</div>
-            </div>
-            <div className="stats-row">
-              <div className="stats-label">Status:</div>
-              <div>Cooked</div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Contact Icons at bottom */}
       <div className="contact-section">
