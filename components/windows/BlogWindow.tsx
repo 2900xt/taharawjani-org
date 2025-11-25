@@ -36,6 +36,12 @@ export default function BlogWindow() {
     const loadBlogs = async () => {
       const blogs: BlogPost[] = [
         {
+          title: 'Round Two: RD',
+          content: '',
+          filename: '/blogs/round-two-rd.md',
+          publishedDate: '2025-11-24'
+        },
+        {
           title: "Nobody's reading, so why bother?",
           content: '',
           filename: '/blogs/noones-reading.md',
