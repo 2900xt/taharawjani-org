@@ -7,8 +7,6 @@
  
  > Just be a normal, well rounded, academically competent individual.
 
-How about you shut the fuck up? It must be really easy to write that from your family's manor, living off your trust fund :D.
-
 For us normies, the college admission process seems random. And, to some degree it is. However, as I'm going through the heat of the process, I've realized one thing: it's a game. And like any game, you can win - all it takes is one, and at that level, I've discovered a trend that you'll like to hear.
 
 Going back to the corny-ahh MIT "Applying Sideways" quote, let's analyze it. 
