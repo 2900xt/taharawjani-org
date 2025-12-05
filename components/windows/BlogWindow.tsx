@@ -36,6 +36,12 @@ export default function BlogWindow() {
     const loadBlogs = async () => {
       const blogs: BlogPost[] = [
         {
+          title: 'Hypercompetition',
+          content: '',
+          filename: '/blogs/hypercompetition.md',
+          publishedDate: '2025-12-04'
+        },
+        {
           title: 'Round Two: RD',
           content: '',
           filename: '/blogs/round-two-rd.md',
@@ -207,7 +213,8 @@ export default function BlogWindow() {
                   p: ({children}) => <p style={{margin: '8px 0', lineHeight: '1.6'}}>{children}</p>,
                   ul: ({children}) => <ul style={{margin: '5px 0', paddingLeft: '20px'}}>{children}</ul>,
                   ol: ({children}) => <ol style={{margin: '5px 0', paddingLeft: '20px'}}>{children}</ol>,
-                  code: ({children, ...props}) => 
+                  blockquote: ({children}) => <blockquote style={{margin: '10px 0', paddingLeft: '15px', borderLeft: '4px solid #ddd', color: '#666', fontStyle: 'italic'}}>{children}</blockquote>,
+                  code: ({children, ...props}) =>
                     <code style={{background: '#f4f4f4', padding: '2px 4px', borderRadius: '3px', fontFamily: 'monospace', fontSize: '12px'}} {...props}>{children}</code>,
                   pre: ({children}) => <pre style={{background: '#f4f4f4', padding: '10px', borderRadius: '4px', margin: '10px 0', overflowX: 'auto'}}>{children}</pre>
                 }}
