@@ -33,4 +33,4 @@ In a digital age where access to all of these strategies and methods is widespre
 
 Or, you could just pop open that trust fund :D
 
-This was a bit of a rant, don't take too much of this seriously. I'm only half serious. Colleges want real people, not resume optimizing robots. 
+This was a bit of a rant, don't take too much of this seriously. I'm only half serious. Colleges want real people, not resume optimizing robots. Be a good person, and you'll do well in life.
