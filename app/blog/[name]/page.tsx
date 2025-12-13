@@ -5,12 +5,18 @@ import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
-import { useEffect, useState, use, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 
-function BlogContent({ params }: { params: Promise<{ name: string }> }) {
-  const { name: blog_name } = use(params);
+export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
+  const [blog_name, setBlogName] = useState<string>('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    params.then((resolvedParams) => {
+      setBlogName(resolvedParams.name);
+    });
+  }, [params]);
 
   useEffect(() => {
     if (!blog_name) return;
@@ -62,7 +68,7 @@ function BlogContent({ params }: { params: Promise<{ name: string }> }) {
 
   return (
     <div className="window">
-      <div className="window-title">Blog - {blog_name}</div>
+      <div className="window-title">Blog - {blog_name || 'Loading...'}</div>
       <div className="window-content active">
         <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', flexShrink: 0 }}>
@@ -127,22 +133,5 @@ function BlogContent({ params }: { params: Promise<{ name: string }> }) {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
-  return (
-    <Suspense fallback={
-      <div className="window">
-        <div className="window-title">Blog - Loading...</div>
-        <div className="window-content active">
-          <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
-            <p style={{ textAlign: 'center', padding: '20px' }}>Loading blog...</p>
-          </div>
-        </div>
-      </div>
-    }>
-      <BlogContent params={params} />
-    </Suspense>
   );
 }
