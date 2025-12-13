@@ -1,20 +1,30 @@
 "use client"
 
 import { createClient } from "@/lib/supabase/client";
-import { useParams } from 'next/navigation';
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import { useEffect, useState } from 'react';
 
-export default function BlogViewer() {
-  const params = useParams();
-  const blog_name = params.name as string;
+export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
+  const [blog_name, setBlogName] = useState<string>('');
+  const [initialized, setInitialized] = useState(false);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setBlogName(resolvedParams.name);
+      setInitialized(true);
+    };
+    initializeParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (!initialized || !blog_name) return;
+
     const loadBlog = async () => {
       const supabase = createClient();
 
@@ -46,7 +56,7 @@ export default function BlogViewer() {
     };
 
     loadBlog();
-  }, [blog_name]);
+  }, [blog_name, initialized]);
 
   const handleShareBlog = async () => {
     const currentUrl = window.location.href
