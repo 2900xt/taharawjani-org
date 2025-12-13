@@ -5,9 +5,9 @@ import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, Suspense } from 'react';
 
-export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
+function BlogContent({ params }: { params: Promise<{ name: string }> }) {
   const { name: blog_name } = use(params);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
@@ -127,5 +127,22 @@ export default function BlogViewer({ params }: { params: Promise<{ name: string 
         </div>
       </div>
     </div>
+  );
+}
+
+export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
+  return (
+    <Suspense fallback={
+      <div className="window">
+        <div className="window-title">Blog - Loading...</div>
+        <div className="window-content active">
+          <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
+            <p style={{ textAlign: 'center', padding: '20px' }}>Loading blog...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <BlogContent params={params} />
+    </Suspense>
   );
 }
