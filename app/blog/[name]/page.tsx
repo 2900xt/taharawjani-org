@@ -5,25 +5,15 @@ import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 
 export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
-  const [blog_name, setBlogName] = useState<string>('');
-  const [initialized, setInitialized] = useState(false);
+  const { name: blog_name } = use(params);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const initializeParams = async () => {
-      const resolvedParams = await params;
-      setBlogName(resolvedParams.name);
-      setInitialized(true);
-    };
-    initializeParams();
-  }, [params]);
-
-  useEffect(() => {
-    if (!initialized || !blog_name) return;
+    if (!blog_name) return;
 
     const loadBlog = async () => {
       const supabase = createClient();
@@ -33,6 +23,8 @@ export default function BlogViewer({ params }: { params: Promise<{ name: string 
         .select('*')
         .eq('name', blog_name)
         .single();
+      
+      console.log("Fetching: ", blog_name);
 
       if (dbError || !dbData) {
         console.error('Error fetching blog:', dbError);
@@ -56,7 +48,7 @@ export default function BlogViewer({ params }: { params: Promise<{ name: string 
     };
 
     loadBlog();
-  }, [blog_name, initialized]);
+  }, [blog_name]);
 
   const handleShareBlog = async () => {
     const currentUrl = window.location.href
