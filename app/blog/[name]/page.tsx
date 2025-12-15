@@ -1,70 +1,88 @@
-"use client"
-
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
-import { useEffect, useState } from 'react';
+import ShareButton from '@/components/ShareButton';
 
-export default function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
-  const [blog_name, setBlogName] = useState<string>('');
-  const [content, setContent] = useState('');
-  const [loading, setLoading] = useState(true);
+// Force dynamic rendering to properly handle database queries
+export const dynamic = 'force-dynamic';
 
-  useEffect(() => {
-    params.then((resolvedParams) => {
-      setBlogName(resolvedParams.name);
-    });
-  }, [params]);
+export default async function BlogViewer({ params }: { params: Promise<{ name: string }> }) {
+  const resolvedParams = await params;
+  const blog_name = decodeURIComponent(resolvedParams.name);
+  
+  const supabase = await createClient();
 
-  useEffect(() => {
-    if (!blog_name) return;
+  const { data: dbData, error: dbError } = await supabase
+    .from('blogs')
+    .select('*')
+    .eq('name', blog_name)
+    .single();
+  
+  console.log("Fetching: ", blog_name);
 
-    const loadBlog = async () => {
-      const supabase = createClient();
-
-      const { data: dbData, error: dbError } = await supabase
-        .from('blogs')
-        .select('*')
-        .eq('name', blog_name)
-        .single();
-      
-      console.log("Fetching: ", blog_name);
-
-      if (dbError || !dbData) {
-        console.error('Error fetching blog:', dbError);
-        setLoading(false);
-        return;
-      }
-
-      const { data: bucketData, error: bucketError } = await supabase.storage
-        .from('blogs')
-        .download(dbData.filename || '');
-
-      if (bucketError || !bucketData) {
-        console.error('Error downloading blog:', bucketError);
-        setLoading(false);
-        return;
-      }
-
-      const text = await bucketData.text();
-      setContent(text);
-      setLoading(false);
-    };
-
-    loadBlog();
-  }, [blog_name]);
-
-  const handleShareBlog = async () => {
-    const currentUrl = window.location.href
-    try {
-      await navigator.clipboard.writeText(currentUrl)
-      alert('Blog URL copied to clipboard!')
-    } catch (err) {
-      alert(`Share this blog: ${currentUrl}`)
-    }
+  if (dbError || !dbData) {
+    console.error('Error fetching blog:', dbError);
+    return (
+      <div className="window">
+        <div className="window-title">Blog - Error</div>
+        <div className="window-content active">
+          <div className="stats-box" style={{ width: '100%', marginBottom: '15px' }}>
+            <p>Error loading blog: {dbError?.message || 'Blog not found'}</p>
+            <Link
+              style={{
+                padding: '5px 10px',
+                background: '#333',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'inline-block',
+                marginTop: '10px'
+              }}
+              href="/blog"
+            >
+              ← Back to Blog List
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
+
+  const { data: bucketData, error: bucketError } = await supabase.storage
+    .from('blogs')
+    .download(dbData.filename || '');
+
+  if (bucketError || !bucketData) {
+    console.error('Error downloading blog:', bucketError);
+    return (
+      <div className="window">
+        <div className="window-title">Blog - Error</div>
+        <div className="window-content active">
+          <div className="stats-box" style={{ width: '100%', marginBottom: '15px' }}>
+            <p>Error loading blog content: {bucketError?.message}</p>
+            <Link
+              style={{
+                padding: '5px 10px',
+                background: '#333',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'inline-block',
+                marginTop: '10px'
+              }}
+              href="/blog"
+            >
+              ← Back to Blog List
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const content = await bucketData.text();
 
   return (
     <div className="window">
@@ -84,18 +102,7 @@ export default function BlogViewer({ params }: { params: Promise<{ name: string 
             >
               ← Back to Blog List
             </Link>
-            <button
-              style={{
-                padding: '5px 10px',
-                background: '#007acc',
-                color: 'white',
-                border: 'none',
-                cursor: 'pointer'
-              }}
-              onClick={handleShareBlog}
-            >
-              📋 Share
-            </button>
+            <ShareButton />
           </div>
           <div
             style={{
@@ -107,10 +114,7 @@ export default function BlogViewer({ params }: { params: Promise<{ name: string 
               backgroundColor: '#fafafa'
             }}
           >
-            {loading ? (
-              <p style={{ textAlign: 'center', padding: '20px' }}>Loading blog...</p>
-            ) : (
-              <ReactMarkdown
+            <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
               components={{
@@ -128,7 +132,6 @@ export default function BlogViewer({ params }: { params: Promise<{ name: string 
             >
               {content || ''}
             </ReactMarkdown>
-            )}
           </div>
         </div>
       </div>
