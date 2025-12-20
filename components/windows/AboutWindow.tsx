@@ -35,12 +35,6 @@ export default function AboutWindow() {
       <div className="window-title">Profiler - ahat</div>
       <div className="tab-container">
         <div
-          className={`tab ${activeTab === "applications" ? "active" : ""}`}
-          onClick={() => setActiveTab("applications")}
-        >
-          Applications
-        </div>
-        <div
           className={`tab ${activeTab === "processes" ? "active" : ""}`}
           onClick={() => setActiveTab("processes")}
         >
@@ -53,78 +47,6 @@ export default function AboutWindow() {
           Terminal
         </div>
       </div>
-
-      {activeTab === "applications" && (
-        <div className="window-content active">
-          <div className="graph-container">
-            <div className="graph">
-              <div className="graph-title">CPU</div>
-              <div className="graph-visual">
-                {cpuBars.map((height, index) => (
-                  <div
-                    key={index}
-                    className="graph-bar"
-                    style={{ height: `${height}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="graph">
-              <div className="graph-title">Memory</div>
-              <div className="graph-visual">
-                {memoryBars.map((height, index) => (
-                  <div
-                    key={index}
-                    className="graph-bar"
-                    style={{ height: `${height}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="stats-container">
-            <div className="stats-box">
-              <div className="stats-title">Profile</div>
-              <div className="stats-row">
-                <div className="stats-label">Name:</div>
-                <div>Taha Rawjani</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Title:</div>
-                <div>Student @ ACL</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Experience:</div>
-                <div>6.7 years</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Status:</div>
-                <div>Available</div>
-              </div>
-            </div>
-            <div className="stats-box">
-              <div className="stats-title">Resources (KB)</div>
-              <div className="stats-row">
-                <div className="stats-label">Creativity:</div>
-                <div>945</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Logic:</div>
-                <div>987</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Coffee:</div>
-                <div>432</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Free:</div>
-                <div>234</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {activeTab === "processes" && (
         <div className="window-content active">
