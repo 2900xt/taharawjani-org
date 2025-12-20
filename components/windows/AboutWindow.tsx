@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Terminal from "../Terminal";
 
 export default function AboutWindow() {
-  const [activeTab, setActiveTab] = useState("applications");
+  const [activeTab, setActiveTab] = useState("processes");
 
   const [cpuBars, setCpuBars] = useState<number[]>([]);
   const [memoryBars, setMemoryBars] = useState<number[]>([]);
@@ -57,11 +57,6 @@ export default function AboutWindow() {
               such as tahascript and neo-OS. Nowadays, I'm building solutions to
               real-world problems, such as saving the freaking whales with
               AI-powered buoys.
-            </p>
-            <p>
-              I'm the Co-Founder and President of ACL Competitive Programming
-              Club, growing to 100+ members. We hosted ACL-IT, which was LCPS's
-              first Competitive Programming Tournament!
             </p>
           </div>
 
