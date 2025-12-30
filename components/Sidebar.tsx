@@ -23,19 +23,19 @@ export default function Sidebar({ side }: SidebarProps) {
         >
           <div className="icon-container">
             <div className="icon">📁</div>
-            <div>Projects</div>
+            <div>stuff</div>
           </div>
         </a>
         <a href="/games" style={{ textDecoration: "none", color: "inherit" }}>
           <div className="icon-container">
             <div className="icon">🎮</div>
-            <div>Games</div>
+            <div>games</div>
           </div>
         </a>
         <a href="/blog" style={{ textDecoration: "none", color: "inherit" }}>
           <div className="icon-container">
             <div className="icon">📝</div>
-            <div>Blog</div>
+            <div>blog</div>
           </div>
         </a>
       </div>
@@ -50,7 +50,7 @@ export default function Sidebar({ side }: SidebarProps) {
     <div className="sidebar right">
       <div className="icon-container" onClick={handleResumeClick}>
         <div className="icon">📄</div>
-        <div>Resume</div>
+        <div>resume.pdf</div>
       </div>
       <a
         href="https://cal.com/ahat-rawjani"
@@ -60,7 +60,7 @@ export default function Sidebar({ side }: SidebarProps) {
       >
         <div className="icon-container">
           <div className="icon">🗓️</div>
-          <div>Cal.com</div>
+          <div>cal :D</div>
         </div>
       </a>
     </div>

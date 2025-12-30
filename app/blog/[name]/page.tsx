@@ -88,7 +88,7 @@ export default async function BlogViewer({ params }: { params: Promise<{ name: s
     <div className="window">
       <div className="window-title">Blog - {blog_name || 'Loading...'}</div>
       <div className="window-content active">
-        <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
+        <div className="stats-box" style={{ width: '100%', marginBottom: '15px', minHeight: '300px', maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', flexShrink: 0 }}>
             <Link
               style={{
@@ -127,7 +127,8 @@ export default async function BlogViewer({ params }: { params: Promise<{ name: s
                 blockquote: ({ children }) => <blockquote style={{ margin: '10px 0', paddingLeft: '15px', borderLeft: '4px solid #ddd', color: '#666', fontStyle: 'italic' }}>{children}</blockquote>,
                 code: ({ children, ...props }) =>
                   <code style={{ background: '#f4f4f4', padding: '2px 4px', borderRadius: '3px', fontFamily: 'monospace', fontSize: '12px' }} {...props}>{children}</code>,
-                pre: ({ children }) => <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '4px', margin: '10px 0', overflowX: 'auto' }}>{children}</pre>
+                pre: ({ children }) => <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '4px', margin: '10px 0', overflowX: 'auto' }}>{children}</pre>,
+                img: ({ src, alt }) => <img src={src} alt={alt} style={{ maxWidth: '100%', height: 'auto', display: 'block', margin: '10px 0', borderRadius: '4px' }} />
               }}
             >
               {content || ''}

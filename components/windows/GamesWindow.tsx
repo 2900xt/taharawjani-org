@@ -1,25 +1,27 @@
 'use client'
 
-import React from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function GamesWindow() {
+  const router = useRouter()
+
   const games = [
     {
       name: 'EcoSpark',
       description: 'A city builder game',
-      url: 'https://cognicadestudios.github.io/EcoSparkGame/',
+      slug: 'ecospark',
       icon: '🏙️'
     },
     {
       name: 'Plundr.io',
       description: 'A pirate battle royale',
-      url: 'https://ashmithry.github.io/Plundr.io-Game/',
+      slug: 'plundr',
       icon: '🏴‍☠️'
     },
     {
       name: 'Bread2Dough',
       description: 'A bread farming tycoon',
-      url: 'https://2900xt.github.io/bread2dough-build/',
+      slug: 'bread2dough',
       icon: '🍞'
     }
   ]
@@ -32,15 +34,15 @@ export default function GamesWindow() {
           <div className="stats-title">Game Library</div>
           <div className="games-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'flex-start' }}>
             {games.map((game, index) => (
-              <div 
-                key={index} 
-                className="game-app" 
-                onClick={() => window.open(game.url, '_blank')}
-                style={{ 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  alignItems: 'center', 
-                  padding: '10px', 
+              <div
+                key={index}
+                className="game-app"
+                onClick={() => router.push(`/games/${game.slug}`)}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  padding: '10px',
                   cursor: 'pointer',
                   minWidth: '80px',
                   textAlign: 'center'

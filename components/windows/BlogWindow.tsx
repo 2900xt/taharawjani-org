@@ -18,6 +18,8 @@ export default function BlogWindow() {
       const supabase = createClient();
       const { data: blogList, error } = await supabase.from('blogs').select('*');
       const blogs: BlogPost[] = blogList || [];
+      // Sort blogs by created_at in descending order (newest first)
+      blogs.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       setBlogs(blogs);
     }
 
@@ -34,7 +36,7 @@ export default function BlogWindow() {
     <div className="window">
       <div className="window-title">Blog</div>
       <div className="window-content active">
-        <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
+        <div className="stats-box" style={{ width: '100%', marginBottom: '15px', minHeight: '300px', maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>
           <div className="stats-title" style={{ flexShrink: 0 }}>Blog Posts</div>
 
           <div style={{ marginBottom: '15px', flexShrink: 0 }}>
