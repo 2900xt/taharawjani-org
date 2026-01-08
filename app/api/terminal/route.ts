@@ -12,7 +12,7 @@ const sessions = new Map<string, { authenticated: boolean; expiresAt: number }>(
 // Clean up expired sessions every 5 minutes
 setInterval(() => {
   const now = Date.now();
-  for (const [sessionId, session] of sessions.entries()) {
+  for (const [sessionId, session] of Array.from(sessions.entries())) {
     if (session.expiresAt < now) {
       sessions.delete(sessionId);
     }
