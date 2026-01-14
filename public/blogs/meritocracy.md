@@ -2,11 +2,11 @@
 > */ˌmerəˈtäkrəsē/*
 > the government or the holding of power by people selected on the basis of their ability.
 
-This is the cornerstone of the American Dream. It's that belief that what anybody does, it will result in them succeeding, as long as they have grit and want it enough. The internet is literred with content that absolutely *clowns* on this system, claiming that the west is failing to provide a meritocracy, but I digress.
+This is the cornerstone of the American Dream. It's that belief that what anybody does, it will result in them succeeding, as long as they have grit and want it enough. The internet is littered with content that absolutely *clowns* on this system, claiming that the west is failing to provide a meritocracy, but I digress.
 
 ### What is our Meritocracy? What even is Merit?
 
-Merit can be defined as someone's abillity. But, that's too vague. I think there's two types of merit:
+Merit can be defined as someone's ability. But, that's too vague. I think there's two types of merit:
 
 1. **Kinetic Merit** - This is based on what you already know and your experiences. AKA, you go to SF, people are gonna ask "Can you code?"
 2. **Potential Merit** - This type of merit judges your potential is based on not only your skills, but also your background and experiences. AKA, you go to MIT, they gonna ask "You got what it takes?" 
@@ -23,9 +23,9 @@ Let's look at hockey leagues in Canada. If you tryna play, the cutoff date is Ja
 
 Simple: we exaggerate it. Our society is setup to have Kinetic Merit, so what we do, is we take the kids that perform the best at like age 6-7 and then put them in a higher league, and give em much better training. What happens? These "crackhead" kids then go onto become exponentially better, as they're being trained better, compounding over time. On the other hand, the kids that aren't exposed to this better training and encouragement as a wee kid, and were unlucky enough to be concived in January instead of born then, they're screwed. Systematically. They will most likely not make it, and how can we say it's their fault?
 
-Like 40% of the candaian national team or something is born in the first quarter of the year, while only 10% in last quarter. That's kinda statistically significant I think.
+Like 40% of the Canadian national team or something is born in the first quarter of the year, while only 10% in last quarter. That's kinda statistically significant I think.
 
-### Wait, this sounds familliar
+### Wait, this sounds familiar
 
 OH SH*T! This is **EXACTLY** what we do in our stupid education system. Let's say you're born in August and miss the september cutoff. You're a year behind. Cooked.
 
