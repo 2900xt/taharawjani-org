@@ -17,6 +17,11 @@ interface BlogPost extends BlogMeta {
 
 const BLOG_LIST: BlogMeta[] = [
   {
+    title: 'The Meritocracy',
+    filename: '/blogs/meritocracy.md',
+    publishedDate: '2026-1-14'
+  },
+  {
     title: 'Hypercompetition',
     filename: '/blogs/hypercompetition.md',
     publishedDate: '2025-12-04'
