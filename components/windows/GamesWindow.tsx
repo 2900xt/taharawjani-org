@@ -23,6 +23,12 @@ export default function GamesWindow() {
       description: 'A bread farming tycoon',
       slug: 'bread2dough',
       icon: '🍞'
+    },
+    {
+      name: 'CR Impostor',
+      description: 'Clash Royale themed Impostor Game',
+      slug: 'crimpostor',
+      icon: '👑'
     }
   ]
 

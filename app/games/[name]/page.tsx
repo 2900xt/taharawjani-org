@@ -20,7 +20,13 @@ export default async function GameViewer({ params }: { params: Promise<{ name: s
       name: 'Bread2Dough',
       url: 'https://2900xt.github.io/bread2dough-build/',
       icon: '🍞'
+    },
+    'crimpostor': {
+      name: 'CR Impostor',
+      url: 'https://2900xt.github.io/crimposter/',
+      icon: '👑'
     }
+
   };
 
   const game = games[gameName.toLowerCase()];
