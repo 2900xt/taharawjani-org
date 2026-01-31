@@ -56,21 +56,6 @@ const BLOG_LIST: BlogMeta[] = [
     filename: '/blogs/tsa-last.md',
     publishedDate: '2025-05-05'
   },
-  {
-    title: 'Create your own Bootsector OS',
-    filename: '/blogs/bootsector-fundamentals.md',
-    publishedDate: '2025-02-10'
-  },
-  {
-    title: 'Building Cross Compilers',
-    filename: '/blogs/cross-compiler.md',
-    publishedDate: '2025-01-20'
-  },
-  {
-    title: 'Page Frame Allocation',
-    filename: '/blogs/page-frame-allocator.md',
-    publishedDate: '2024-12-05'
-  },
 ]
 
 export default function BlogWindow() {
@@ -160,33 +145,33 @@ export default function BlogWindow() {
         <div className="window-content active">
           <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', flexShrink: 0 }}>
-              <button 
+              <button
                 onClick={handleBackToList}
-                style={{ 
-                  padding: '5px 10px', 
-                  background: '#333', 
-                  color: 'white', 
-                  border: 'none', 
+                style={{
+                  padding: '5px 10px',
+                  background: '#333',
+                  color: 'white',
+                  border: 'none',
                   cursor: 'pointer'
                 }}
               >
                 ← Back to Blog List
               </button>
-              <button 
+              <button
                 onClick={handleShareBlog}
-                style={{ 
-                  padding: '5px 10px', 
-                  background: '#007acc', 
-                  color: 'white', 
-                  border: 'none', 
+                style={{
+                  padding: '5px 10px',
+                  background: '#007acc',
+                  color: 'white',
+                  border: 'none',
                   cursor: 'pointer'
                 }}
               >
                 📋 Share
               </button>
             </div>
-            <div 
-              style={{ 
+            <div
+              style={{
                 flex: 1,
                 overflowY: 'auto',
                 padding: '10px',
@@ -199,16 +184,16 @@ export default function BlogWindow() {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]}
                 components={{
-                  h1: ({children}) => <h1 style={{margin: '10px 0 5px 0', fontSize: '18px'}}>{children}</h1>,
-                  h2: ({children}) => <h2 style={{margin: '10px 0 5px 0', fontSize: '16px'}}>{children}</h2>,
-                  h3: ({children}) => <h3 style={{margin: '10px 0 5px 0', fontSize: '14px'}}>{children}</h3>,
-                  p: ({children}) => <p style={{margin: '8px 0', lineHeight: '1.6'}}>{children}</p>,
-                  ul: ({children}) => <ul style={{margin: '5px 0', paddingLeft: '20px'}}>{children}</ul>,
-                  ol: ({children}) => <ol style={{margin: '5px 0', paddingLeft: '20px'}}>{children}</ol>,
-                  blockquote: ({children}) => <blockquote style={{margin: '10px 0', paddingLeft: '15px', borderLeft: '4px solid #ddd', color: '#666', fontStyle: 'italic'}}>{children}</blockquote>,
-                  code: ({children, ...props}) =>
-                    <code style={{background: '#f4f4f4', padding: '2px 4px', borderRadius: '3px', fontFamily: 'monospace', fontSize: '12px'}} {...props}>{children}</code>,
-                  pre: ({children}) => <pre style={{background: '#f4f4f4', padding: '10px', borderRadius: '4px', margin: '10px 0', overflowX: 'auto'}}>{children}</pre>
+                  h1: ({ children }) => <h1 style={{ margin: '10px 0 5px 0', fontSize: '18px' }}>{children}</h1>,
+                  h2: ({ children }) => <h2 style={{ margin: '10px 0 5px 0', fontSize: '16px' }}>{children}</h2>,
+                  h3: ({ children }) => <h3 style={{ margin: '10px 0 5px 0', fontSize: '14px' }}>{children}</h3>,
+                  p: ({ children }) => <p style={{ margin: '8px 0', lineHeight: '1.6' }}>{children}</p>,
+                  ul: ({ children }) => <ul style={{ margin: '5px 0', paddingLeft: '20px' }}>{children}</ul>,
+                  ol: ({ children }) => <ol style={{ margin: '5px 0', paddingLeft: '20px' }}>{children}</ol>,
+                  blockquote: ({ children }) => <blockquote style={{ margin: '10px 0', paddingLeft: '15px', borderLeft: '4px solid #ddd', color: '#666', fontStyle: 'italic' }}>{children}</blockquote>,
+                  code: ({ children, ...props }) =>
+                    <code style={{ background: '#f4f4f4', padding: '2px 4px', borderRadius: '3px', fontFamily: 'monospace', fontSize: '12px' }} {...props}>{children}</code>,
+                  pre: ({ children }) => <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '4px', margin: '10px 0', overflowX: 'auto' }}>{children}</pre>
                 }}
               >
                 {selectedPost.content}
@@ -226,7 +211,7 @@ export default function BlogWindow() {
       <div className="window-content active">
         <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
           <div className="stats-title" style={{ flexShrink: 0 }}>Blog Posts</div>
-          
+
           <div style={{ marginBottom: '15px', flexShrink: 0 }}>
             <input
               type="text"
@@ -250,7 +235,7 @@ export default function BlogWindow() {
               </p>
             ) : (
               filteredBlogs.map((blog, index) => (
-                <div 
+                <div
                   key={index}
                   onClick={() => handleBlogSelect(blog)}
                   style={{
