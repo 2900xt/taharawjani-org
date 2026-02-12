@@ -82,15 +82,8 @@ export async function POST(request: Request) {
           last_action_at: new Date().toISOString(),
         })
         .eq('id', room.id);
-    } else {
-      // Just update the player's lastPollAt
-      await supabase
-        .from('poker_rooms')
-        .update({
-          state: state as unknown as Record<string, unknown>,
-        })
-        .eq('id', room.id);
     }
+    // Skip DB write when only lastPollAt changed to avoid noisy Realtime events
 
     const clientState = sanitizeGameState(state, playerToken);
 

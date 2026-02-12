@@ -61,6 +61,7 @@ export async function POST(request: Request) {
       .update({
         state: state as unknown as Record<string, unknown>,
         updated_at: room.updated_at,
+        last_action_at: new Date().toISOString(),
       })
       .eq('id', room.id)
       .eq('updated_at', room.updated_at);

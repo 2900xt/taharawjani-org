@@ -1,7 +1,7 @@
 import { GameState, ClientGameState, ClientPlayer, ActionType } from './types';
 import { getAvailableActions } from './engine';
 
-const DISCONNECT_THRESHOLD = 15000; // 15 seconds
+const DISCONNECT_THRESHOLD = 30000; // 30 seconds (heartbeat is 15s)
 
 export function sanitizeGameState(state: GameState, playerToken: string): ClientGameState {
   const requestingPlayer = state.players.find(p => p?.token === playerToken);
