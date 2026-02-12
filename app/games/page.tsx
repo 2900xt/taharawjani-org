@@ -29,6 +29,12 @@ export default function GamesPage() {
       description: 'Clash Royale themed Impostor Game',
       slug: 'crimpostor',
       icon: '👑'
+    },
+    {
+      name: "Texas Hold'em",
+      description: 'Multiplayer poker',
+      slug: 'poker',
+      icon: '♠'
     }
   ]
 
