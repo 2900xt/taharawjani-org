@@ -476,6 +476,7 @@ function resolveShowdown(state: GameState): void {
     seatIndex: hr.player.seatIndex,
     cards: hr.player.holeCards,
     handName: hr.result.name,
+    bestCards: hr.result.bestCards,
   }));
 
   const winners: { seatIndex: number; amount: number; handName: string }[] = [];

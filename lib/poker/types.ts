@@ -45,7 +45,7 @@ export interface GameState {
   handComplete: boolean;
   handCompleteAt: string | null;
   winners: { seatIndex: number; amount: number; handName: string }[] | null;
-  showdownHands: { seatIndex: number; cards: Card[]; handName: string }[] | null;
+  showdownHands: { seatIndex: number; cards: Card[]; handName: string; bestCards: Card[] }[] | null;
   lastActionAt: string;
   minRaise: number;
 }
@@ -83,7 +83,7 @@ export interface ClientGameState {
   actionLog: string[];
   handComplete: boolean;
   winners: { seatIndex: number; amount: number; handName: string }[] | null;
-  showdownHands: { seatIndex: number; cards: Card[]; handName: string }[] | null;
+  showdownHands: { seatIndex: number; cards: Card[]; handName: string; bestCards: Card[] }[] | null;
   mySeat: number;
   myTurn: boolean;
   availableActions: ActionType[];

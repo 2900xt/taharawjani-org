@@ -27,7 +27,7 @@ const SUIT_COLORS: Record<string, string> = {
   s: '#000',
 };
 
-function CardDisplay({ card, faceDown }: { card?: Card | null; faceDown?: boolean }) {
+function CardDisplay({ card, faceDown, highlighted }: { card?: Card | null; faceDown?: boolean; highlighted?: boolean }) {
   if (faceDown || !card) {
     return (
       <span style={{
@@ -59,7 +59,7 @@ function CardDisplay({ card, faceDown }: { card?: Card | null; faceDown?: boolea
       justifyContent: 'center',
       width: '36px',
       height: '50px',
-      border: '2px solid #000',
+      border: `2px solid ${highlighted ? '#ffcc00' : '#000'}`,
       borderRadius: '4px',
       background: '#fff',
       margin: '0 2px',
@@ -67,6 +67,9 @@ function CardDisplay({ card, faceDown }: { card?: Card | null; faceDown?: boolea
       fontSize: '14px',
       fontWeight: 'bold',
       lineHeight: 1,
+      transform: highlighted ? 'translateY(-8px)' : 'none',
+      boxShadow: highlighted ? '0 0 8px rgba(255, 204, 0, 0.6)' : 'none',
+      transition: 'transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
     }}>
       <span>{card.rank}</span>
       <span style={{ fontSize: '16px' }}>{SUIT_SYMBOLS[card.suit]}</span>
@@ -84,12 +87,18 @@ const SEAT_POSITIONS: { top: string; left: string }[] = [
   { top: '60%', left: '92%' },   // 5 - bottom right
 ];
 
-function PlayerSeat({ player, isDealer, isActive, isSelf, seatIndex }: {
+function isCardInBest(card: Card, bestCards: Card[]): boolean {
+  return bestCards.some(bc => bc.rank === card.rank && bc.suit === card.suit);
+}
+
+function PlayerSeat({ player, isDealer, isActive, isSelf, seatIndex, isWinner, bestCards }: {
   player: ClientPlayer | null;
   isDealer: boolean;
   isActive: boolean;
   isSelf: boolean;
   seatIndex: number;
+  isWinner?: boolean;
+  bestCards?: Card[];
 }) {
   const pos = SEAT_POSITIONS[seatIndex];
 
@@ -126,8 +135,8 @@ function PlayerSeat({ player, isDealer, isActive, isSelf, seatIndex }: {
         {player.status === 'folded' ? null : (
           player.holeCards ? (
             <>
-              <CardDisplay card={player.holeCards[0]} />
-              <CardDisplay card={player.holeCards[1]} />
+              <CardDisplay card={player.holeCards[0]} highlighted={isWinner && bestCards ? isCardInBest(player.holeCards[0], bestCards) : false} />
+              <CardDisplay card={player.holeCards[1]} highlighted={isWinner && bestCards ? isCardInBest(player.holeCards[1], bestCards) : false} />
             </>
           ) : hasCards ? (
             <>
@@ -140,13 +149,15 @@ function PlayerSeat({ player, isDealer, isActive, isSelf, seatIndex }: {
 
       {/* Player info box */}
       <div style={{
-        border: `2px solid ${isActive ? '#ffcc00' : isSelf ? '#7b68ee' : '#000'}`,
+        border: `2px solid ${isWinner ? '#ffcc00' : isActive ? '#ffcc00' : isSelf ? '#7b68ee' : '#000'}`,
         background: player.status === 'folded' ? '#666' : (isSelf ? '#2d1b69' : '#000'),
         color: '#fff',
         padding: '4px 8px',
         minWidth: '90px',
         fontSize: '13px',
         position: 'relative',
+        boxShadow: isWinner ? '0 0 12px rgba(255, 204, 0, 0.7)' : 'none',
+        transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
       }}>
         {isDealer && (
           <span style={{
@@ -259,9 +270,13 @@ export default function PokerTable({ gameState, roomCode, roomStatus, playerToke
           gap: '4px',
           zIndex: 1,
         }}>
-          {gs.communityCards.map((card, i) => (
-            <CardDisplay key={i} card={card} />
-          ))}
+          {gs.communityCards.map((card, i) => {
+            const isHighlighted = !!(gs.winners && gs.showdownHands && gs.winners.some(w => {
+              const sh = gs.showdownHands!.find(h => h.seatIndex === w.seatIndex);
+              return sh?.bestCards.some(bc => bc.rank === card.rank && bc.suit === card.suit);
+            }));
+            return <CardDisplay key={i} card={card} highlighted={isHighlighted} />;
+          })}
         </div>
 
         {/* Pot display */}
@@ -296,16 +311,22 @@ export default function PokerTable({ gameState, roomCode, roomStatus, playerToke
         </div>
 
         {/* Player seats */}
-        {gs.players.map((player, i) => (
-          <PlayerSeat
-            key={i}
-            player={player}
-            isDealer={gs.dealerSeat === i}
-            isActive={gs.activePlayerSeat === i}
-            isSelf={gs.mySeat === i}
-            seatIndex={i}
-          />
-        ))}
+        {gs.players.map((player, i) => {
+          const winnerEntry = gs.winners?.find(w => w.seatIndex === i);
+          const showdownEntry = gs.showdownHands?.find(h => h.seatIndex === i);
+          return (
+            <PlayerSeat
+              key={i}
+              player={player}
+              isDealer={gs.dealerSeat === i}
+              isActive={gs.activePlayerSeat === i}
+              isSelf={gs.mySeat === i}
+              seatIndex={i}
+              isWinner={!!winnerEntry}
+              bestCards={winnerEntry && showdownEntry ? showdownEntry.bestCards : undefined}
+            />
+          );
+        })}
       </div>
 
       {/* Waiting room / Start */}
