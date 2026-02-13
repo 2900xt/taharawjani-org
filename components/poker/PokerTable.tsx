@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ClientGameState, ClientPlayer, Card, ActionType } from '@/lib/poker/types';
 
 interface PokerTableProps {
@@ -185,18 +185,25 @@ function PlayerSeat({ player, isDealer, isActive, isSelf, seatIndex }: {
 }
 
 export default function PokerTable({ gameState, roomCode, roomStatus, playerToken, onAction, onStart, onLeave }: PokerTableProps) {
-  const [raiseAmount, setRaiseAmount] = useState('');
-
   const gs = gameState;
+  const myPlayer = gs.players[gs.mySeat];
+  const minRaise = gs.currentBet + gs.minRaise;
+  const maxRaise = myPlayer ? myPlayer.chips + myPlayer.currentBet : minRaise;
+
+  const [raiseAmount, setRaiseAmount] = useState(minRaise);
+
+  useEffect(() => {
+    setRaiseAmount(minRaise);
+  }, [minRaise]);
+
   const isWaiting = roomStatus === 'waiting';
   const isCreator = gs.mySeat === 0;
   const playerCount = gs.players.filter(p => p !== null).length;
 
   function handleRaise() {
-    const amount = parseInt(raiseAmount);
-    if (isNaN(amount) || amount <= 0) return;
-    onAction('raise', amount);
-    setRaiseAmount('');
+    if (raiseAmount < minRaise) return;
+    onAction('raise', raiseAmount);
+    setRaiseAmount(minRaise);
   }
 
   return (
@@ -371,18 +378,62 @@ export default function PokerTable({ gameState, roomCode, roomStatus, playerToke
             )}
           </div>
           {gs.availableActions.includes('raise') && (
-            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+            <div style={{ marginTop: '8px' }}>
+              <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => setRaiseAmount(minRaise)}
+                  style={{ flex: 1, minWidth: '50px', fontSize: '12px', padding: '4px', background: raiseAmount === minRaise ? '#7b68ee' : undefined }}
+                >
+                  Min
+                </button>
+                <button
+                  onClick={() => setRaiseAmount(Math.max(minRaise, Math.min(Math.floor(gs.pot / 2), maxRaise)))}
+                  style={{ flex: 1, minWidth: '50px', fontSize: '12px', padding: '4px' }}
+                >
+                  &frac12; Pot
+                </button>
+                <button
+                  onClick={() => setRaiseAmount(Math.max(minRaise, Math.min(gs.pot, maxRaise)))}
+                  style={{ flex: 1, minWidth: '50px', fontSize: '12px', padding: '4px' }}
+                >
+                  Pot
+                </button>
+                <button
+                  onClick={() => setRaiseAmount(maxRaise)}
+                  style={{ flex: 1, minWidth: '50px', fontSize: '12px', padding: '4px', background: raiseAmount === maxRaise ? '#cc4444' : undefined }}
+                >
+                  Max
+                </button>
+              </div>
               <input
-                type="number"
+                type="range"
+                min={minRaise}
+                max={maxRaise}
+                step={gs.bigBlind}
                 value={raiseAmount}
-                onChange={e => setRaiseAmount(e.target.value)}
-                placeholder={`Min: ${gs.currentBet + gs.minRaise}`}
-                min={gs.currentBet + gs.minRaise}
-                style={{ flex: 1 }}
+                onChange={e => setRaiseAmount(Number(e.target.value))}
+                style={{
+                  width: '100%',
+                  cursor: 'pointer',
+                  accentColor: '#7b68ee',
+                }}
               />
-              <button onClick={handleRaise} style={{ background: '#cc8800' }}>
-                Raise
-              </button>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '6px' }}>
+                <input
+                  type="number"
+                  value={raiseAmount}
+                  onChange={e => {
+                    const v = Number(e.target.value);
+                    if (!isNaN(v)) setRaiseAmount(Math.max(minRaise, Math.min(v, maxRaise)));
+                  }}
+                  min={minRaise}
+                  max={maxRaise}
+                  style={{ flex: 1, textAlign: 'center', fontSize: '16px' }}
+                />
+                <button onClick={handleRaise} style={{ background: '#cc8800', minWidth: '80px' }}>
+                  Raise {raiseAmount}
+                </button>
+              </div>
             </div>
           )}
         </div>
