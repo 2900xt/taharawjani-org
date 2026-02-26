@@ -17,6 +17,11 @@ interface BlogPost extends BlogMeta {
 
 const BLOG_LIST: BlogMeta[] = [
   {
+    title: 'Life Aint Chess',
+    filename: '/blogs/life-is-not-chess.md',
+    publishedDate: '2026-2-26'
+  },
+  {
     title: 'Technoblade Never Dies',
     filename: '/blogs/technoblade.md',
     publishedDate: '2026-1-31'
