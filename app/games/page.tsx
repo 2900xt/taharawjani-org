@@ -35,6 +35,12 @@ export default function GamesPage() {
       description: 'Multiplayer poker',
       slug: 'poker',
       icon: '♠'
+    },
+    {
+      name: 'CF Practice',
+      description: 'Codeforces practice arena',
+      slug: 'cf-practice',
+      icon: '⚔'
     }
   ]
 
