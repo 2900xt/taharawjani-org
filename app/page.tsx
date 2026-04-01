@@ -11,8 +11,8 @@ export default function Home() {
   const [memoryBars, setMemoryBars] = useState<number[]>([]);
   const [visualizerBars, setVisualizerBars] = useState<number[]>([]);
   const [currentSong] = useState({
-    title: "Lofi Beats",
-    artist: "Study Session"
+    title: "BAILE INoLVIDABLE",
+    artist: "BAD BUNNY"
   });
 
   useEffect(() => {
@@ -143,8 +143,8 @@ export default function Home() {
               <div className="stats-title">Experience</div>
               <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: '8px' }}>
-                  <a href="https://mobylabs.org/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    CTO @ Moby Labs
+                  <a href="https://www.janelia.org/" style={{ color: '#0066cc', textDecoration: 'none' }}>
+                    Incoming @ Janelia HHMI
                   </a>
                   <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Jun 2024 - Present</span>
                 </li>
@@ -162,9 +162,9 @@ export default function Home() {
                 </li>
                 <li style={{ marginBottom: '8px' }}>
                   <a href="https://www.academies-it.org/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    CS @ Academies of Loudoun
+                    President @ ACL-IT
                   </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Aug 2022 - Present</span>
+                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Aug 2024 - Present</span>
                 </li>
               </ul>
             </div>

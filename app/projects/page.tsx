@@ -23,15 +23,15 @@ export default function ProjectsPage() {
       description: "Counter Strike inspired 2D shooter with custom game engine and AI."
     },
     {
-      title: "Reef: The Research Search Engine",
-      tech: "Next.js, LangGraph, Supabase, Stripe, Tailwind",
-      link: "https://app.mobylabs.org",
+      title: "Mobylabs: Automating AI Research",
+      tech: "Next.js, LangGraph, Supabase, Python",
+      link: "https://github.com/2900xt/mobylabs",
       description: "An abstract search engine and research idea generator. Uses a knowledge graph and vector DB of Arxiv papers."
     },
     {
       title: "Nexus: AI Learning Platform",
       tech: "LangGraph, RAG, Kaplay.js, ElevenLabs, Next.js",
-      link: "https://nexus.education",
+      link: "https://nexus-rust-theta.vercel.app/landing",
       description: "Agentically generates interactive mini-games and videos from teacher lesson plans in one click. Won PatriotHacks 2026."
     }
   ]
