@@ -146,7 +146,7 @@ export default function Home() {
                   <a href="https://www.janelia.org/" style={{ color: '#0066cc', textDecoration: 'none' }}>
                     Incoming @ Janelia HHMI
                   </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Jun 2024 - Present</span>
+                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Summer 2026</span>
                 </li>
                 <li style={{ marginBottom: '8px' }}>
                   <a href="https://maximus.com/" style={{ color: '#0066cc', textDecoration: 'none' }}>
