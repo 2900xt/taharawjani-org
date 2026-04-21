@@ -78,6 +78,13 @@ const BLOG_LIST: BlogMeta[] = [
   },
 ]
 
+// Pinned blog filenames — add or remove your favorites here
+const PINNED_FILENAMES = new Set([
+  '/blogs/noones-reading.md',
+  '/blogs/hypercompetition.md',
+  '/blogs/meritocracy.md',
+])
+
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
@@ -117,6 +124,9 @@ export default function BlogPage() {
   const filteredBlogs = BLOG_LIST.filter((blog: BlogMeta) =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  const pinnedBlogs = filteredBlogs.filter(b => PINNED_FILENAMES.has(b.filename))
+  const otherBlogs = filteredBlogs.filter(b => !PINNED_FILENAMES.has(b.filename))
 
   const handleBlogSelect = async (blog: BlogMeta) => {
     setIsLoading(true)
@@ -248,31 +258,65 @@ export default function BlogPage() {
             />
           </div>
 
-          <div className="blog-list" style={{ flex: 1, overflowY: 'auto', paddingRight: '5px' }}>
+          <div style={{ flex: 1, overflowY: 'auto', paddingRight: '5px' }}>
             {filteredBlogs.length === 0 ? (
               <p style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
                 No blog posts found.
               </p>
             ) : (
-              filteredBlogs.map((blog, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleBlogSelect(blog)}
-                  style={{
-                    padding: '10px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                    marginBottom: '10px',
-                    cursor: 'pointer',
-                    backgroundColor: '#f9f9f9'
-                  }}
-                >
-                  <h3 style={{ margin: '0 0 5px 0', fontSize: '16px' }}>{blog.title}</h3>
-                  <p style={{ margin: '0', color: '#666', fontSize: '12px' }}>
-                    {new Date(blog.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                  </p>
+              <>
+                {pinnedBlogs.length > 0 && (
+                  <div style={{ marginBottom: '12px' }}>
+                    <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
+                      Pinned
+                    </div>
+                    {pinnedBlogs.map((blog, index) => (
+                      <div
+                        key={`pinned-${index}`}
+                        onClick={() => handleBlogSelect(blog)}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'baseline',
+                          padding: '4px 0',
+                          cursor: 'pointer',
+                          borderBottom: '1px solid #eee',
+                        }}
+                      >
+                        <span style={{ fontSize: '14px' }}>* {blog.title}</span>
+                        <span style={{ fontSize: '11px', color: '#888', whiteSpace: 'nowrap', marginLeft: '12px' }}>
+                          {new Date(blog.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div>
+                  <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
+                    All Posts
+                  </div>
+                  {otherBlogs.map((blog, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleBlogSelect(blog)}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'baseline',
+                        padding: '4px 0',
+                        cursor: 'pointer',
+                        borderBottom: '1px solid #eee',
+                      }}
+                    >
+                      <span style={{ fontSize: '14px' }}>{blog.title}</span>
+                      <span style={{ fontSize: '11px', color: '#888', whiteSpace: 'nowrap', marginLeft: '12px' }}>
+                        {new Date(blog.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))
+              </>
             )}
           </div>
         </div>

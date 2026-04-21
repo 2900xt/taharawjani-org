@@ -1,8 +1,8 @@
 # Technoblade
 
-A legend. You're wondering: how?? This dude sat in his room and made minecraft videos. It's been more than four years since he last uploaded.
+A legend. 
 
-NO. Fuck you. He's the fucking goat. He's a goddamn philosopher. So today, I'll present to you what technoblade stood for, and how you and I should should strive to follow his morals in the new 'gilded age'.
+He's the fucking goat. He's a goddamn philosopher. So today, I'll present to you what technoblade stood for, and how you and I should should strive to follow his morals in the new 'gilded age'.
 
 # Mentality
 
