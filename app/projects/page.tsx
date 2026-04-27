@@ -8,31 +8,31 @@ export default function ProjectsPage() {
       title: "Neo OS",
       tech: "C++, x86 Assembly, Custom Drivers",
       link: "https://github.com/2900xt/neo-OS",
-      description: "An operating system written from scratch featuring custom drivers, UNIX-based VFS, multithreading, interactive shell with TahaScript, and custom .nic image format."
+      description: "An operating system written from scratch featuring custom drivers, UNIX-based VFS, multithreading, interactive shell with TahaScript."
     },
     {
       title: "MobyGlobal: AI Whale Tracking",
       tech: "TensorFlow, Python, Next.js, Embedded C++",
       link: "https://mobylabs.org",
-      description: "Real-time AI-powered whale tracking network using 3D-printed buoys (patent pending). Won 4th at International Science & Engineering Fair 2025."
+      description: "Real-time AI-powered whale tracking network using 3D-printed buoys."
     },
     {
-      title: "Braindead 2DS",
-      tech: "Java Swing, A* Pathfinding, Game Engine",
-      link: "https://github.com/2900xt/Braindead-2DS",
-      description: "Counter Strike inspired 2D shooter with custom game engine and AI."
+      title: "67-Racer",
+      tech: "mosquitto, nextjs, opencv, python, pytorch, aws deepracers",
+      link: "https://ghost-racer.vercel.app/",
+      description: " Clones how you drive. Then beats you at your own game."
     },
     {
       title: "Mobylabs: Automating AI Research",
       tech: "Next.js, LangGraph, Supabase, Python",
       link: "https://github.com/2900xt/mobylabs",
-      description: "An abstract search engine and research idea generator. Uses a knowledge graph and vector DB of Arxiv papers."
+      description: "Fully automated AI research platform. Scrapes ArXiv for papers, generates code implementations, and drafts methodology and results sections for research papers."
     },
     {
       title: "Nexus: AI Learning Platform",
       tech: "LangGraph, RAG, Kaplay.js, ElevenLabs, Next.js",
       link: "https://nexus-rust-theta.vercel.app/landing",
-      description: "Agentically generates interactive mini-games and videos from teacher lesson plans in one click. Won PatriotHacks 2026."
+      description: "Agentically generates interactive mini-games and videos from teacher lesson plans in one click."
     }
   ]
 
