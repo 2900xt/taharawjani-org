@@ -20,19 +20,19 @@ export default function ProjectsPage() {
       title: "67-Racer",
       tech: "mosquitto, nextjs, opencv, python, aws deepracers",
       link: "https://ghost-racer.vercel.app/",
-      description: " Clones how you drive. Then beats you at your own game."
+      description: " Clones how you drive. Then beats you at your own game with reinforcement learning."
     },
     {
       title: "Mobylabs: Automating AI Research",
       tech: "next.js, langchain, python, arxiv API, anthropic, openai",
       link: "https://github.com/2900xt/mobylabs",
-      description: "Fully automated AI research platform. Scrapes ArXiv for papers, generates code implementations, and drafts methodology and results sections for research papers."
+      description: "Fully automated AI research platform. Scrapes arxiv, ideates, codes, and writes papers on its own."
     },
     {
       title: "Nexus: AI Learning Platform",
       tech: "langgraph, kaplay.js, next.js, python, digitalocean, elevenlabs",
       link: "https://nexus-rust-theta.vercel.app/landing",
-      description: "Agentically generates interactive mini-games and videos from teacher lesson plans in one click."
+      description: "Agentically generates mini-games and videos from teacher lesson plans."
     }
   ]
 
