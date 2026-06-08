@@ -4,86 +4,11 @@ import React, { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
-
-interface BlogMeta {
-  title: string
-  filename: string
-  publishedDate: string
-}
+import { BLOG_LIST, PINNED_FILENAMES, type BlogMeta } from '@/lib/blogs'
 
 interface BlogPost extends BlogMeta {
   content: string
 }
-
-const BLOG_LIST: BlogMeta[] = [
-  {
-    title: 'what you had',
-    filename: '/blogs/what-you-had.md',
-    publishedDate: '2026-4-11'
-  },
-  {
-    title: 'Searching For a World That Doesn\'t Exist',
-    filename: '/blogs/searching-for-a-world.md',
-    publishedDate: '2026-3-30'
-  },
-  {
-    title: 'Life Aint Chess',
-    filename: '/blogs/life-is-not-chess.md',
-    publishedDate: '2026-2-26'
-  },
-  {
-    title: 'Technoblade Never Dies',
-    filename: '/blogs/technoblade.md',
-    publishedDate: '2026-1-31'
-  },
-  {
-    title: 'The Meritocracy',
-    filename: '/blogs/meritocracy.md',
-    publishedDate: '2026-1-14'
-  },
-  {
-    title: 'Hypercompetition',
-    filename: '/blogs/hypercompetition.md',
-    publishedDate: '2025-12-04'
-  },
-  {
-    title: 'Round Two: RD',
-    filename: '/blogs/round-two-rd.md',
-    publishedDate: '2025-11-24'
-  },
-  {
-    title: "Nobody's reading, so why bother?",
-    filename: '/blogs/noones-reading.md',
-    publishedDate: '2025-11-12'
-  },
-  {
-    title: 'Early Action: Tale of a burning ship',
-    filename: '/blogs/early-action.md',
-    publishedDate: '2025-11-02'
-  },
-  {
-    title: 'The Mom Test',
-    filename: '/blogs/the-mom-test.md',
-    publishedDate: '2025-10-25'
-  },
-  {
-    title: 'Meeting Literal Geniuses: ISEF 2025',
-    filename: '/blogs/isef2025.md',
-    publishedDate: '2025-05-22'
-  },
-  {
-    title: 'Getting Last in TSA: VA Technosphere 2025',
-    filename: '/blogs/tsa-last.md',
-    publishedDate: '2025-05-05'
-  },
-]
-
-// Pinned blog filenames — add or remove your favorites here
-const PINNED_FILENAMES = new Set([
-  '/blogs/noones-reading.md',
-  '/blogs/hypercompetition.md',
-  '/blogs/meritocracy.md',
-])
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('')

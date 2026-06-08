@@ -4,8 +4,14 @@ import { Analytics } from "@vercel/analytics/next";
 import Sidebar from "@/components/Sidebar";
 
 export const metadata = {
+  metadataBase: new URL("https://taharawjani.org"),
   title: "ahat",
   description: "ahat's home",
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
 };
 
 export default function RootLayout({
