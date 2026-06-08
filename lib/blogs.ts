@@ -87,7 +87,25 @@ export function slugFromFilename(filename: string): string {
   return filename.replace('/blogs/', '').replace('.md', '')
 }
 
-/** Canonical, shareable URL for a post (matches the ?blog= deep link the UI uses). */
+/** Look up a post by its URL slug, e.g. "meritocracy". */
+export function getPostBySlug(slug: string): BlogMeta | undefined {
+  return BLOG_LIST.find((b) => slugFromFilename(b.filename) === slug)
+}
+
+/** Canonical, shareable URL for a post — a real server-rendered page. */
 export function postUrl(blog: BlogMeta): string {
-  return `${SITE_URL}/blog?blog=${slugFromFilename(blog.filename)}`
+  return `${SITE_URL}/blog/${slugFromFilename(blog.filename)}`
+}
+
+/** Plain-text excerpt from markdown, for meta descriptions and feed summaries. */
+export function excerptFromMarkdown(content: string, maxLen = 160): string {
+  const text = content
+    .replace(/```[\s\S]*?```/g, '') // code blocks
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links → text
+    .replace(/[#>*_`~]/g, '') // markdown syntax
+    .replace(/\s+/g, ' ')
+    .trim()
+  if (text.length <= maxLen) return text
+  return text.slice(0, maxLen).replace(/\s+\S*$/, '').trim() + '…'
 }

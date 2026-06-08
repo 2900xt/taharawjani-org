@@ -6,6 +6,7 @@ import {
   SITE_TITLE,
   SITE_DESCRIPTION,
   postUrl,
+  excerptFromMarkdown,
   type BlogMeta,
 } from '@/lib/blogs'
 
@@ -42,7 +43,7 @@ export async function GET() {
       <link>${escapeXml(url)}</link>
       <guid isPermaLink="true">${escapeXml(url)}</guid>
       <pubDate>${pubDate}</pubDate>
-      <description>${escapeXml(content.slice(0, 280).trim())}…</description>
+      <description>${escapeXml(excerptFromMarkdown(content, 280))}</description>
       <content:encoded><![CDATA[${content}]]></content:encoded>
     </item>`
     })

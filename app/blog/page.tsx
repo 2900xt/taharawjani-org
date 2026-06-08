@@ -1,164 +1,56 @@
 'use client';
 
 import React, { useState, useEffect } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeHighlight from 'rehype-highlight'
-import { BLOG_LIST, PINNED_FILENAMES, type BlogMeta } from '@/lib/blogs'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { BLOG_LIST, PINNED_FILENAMES, slugFromFilename, type BlogMeta } from '@/lib/blogs'
 
-interface BlogPost extends BlogMeta {
-  content: string
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+}
+
+function BlogRow({ blog, pinned }: { blog: BlogMeta; pinned?: boolean }) {
+  return (
+    <Link
+      href={`/blog/${slugFromFilename(blog.filename)}`}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
+        padding: '4px 0',
+        cursor: 'pointer',
+        borderBottom: '1px solid #eee',
+        textDecoration: 'none',
+        color: 'inherit',
+      }}
+    >
+      <span style={{ fontSize: '14px' }}>{pinned ? `* ${blog.title}` : blog.title}</span>
+      <span style={{ fontSize: '11px', color: '#888', whiteSpace: 'nowrap', marginLeft: '12px' }}>
+        {formatDate(blog.publishedDate)}
+      </span>
+    </Link>
+  )
 }
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
-  const loadBlogContent = async (blog: BlogMeta): Promise<BlogPost> => {
-    try {
-      const response = await fetch(blog.filename)
-      if (!response.ok) throw new Error(`HTTP ${response.status}`)
-      const content = await response.text()
-      return { ...blog, content }
-    } catch (err) {
-      console.error('Failed to load', blog.filename, err)
-      return { ...blog, content: 'Failed to load content.' }
-    }
-  }
-
+  // Backward compatibility: redirect legacy /blog?blog=<slug> links to /blog/<slug>.
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const blogParam = urlParams.get('blog')
-
+    const blogParam = new URLSearchParams(window.location.search).get('blog')
     if (blogParam) {
-      const foundBlog = BLOG_LIST.find(blog =>
-        blog.filename === `/blogs/${blogParam}.md` ||
-        blog.filename === `/blogs/${blogParam}`
-      )
-      if (foundBlog) {
-        setIsLoading(true)
-        loadBlogContent(foundBlog).then(post => {
-          setSelectedPost(post)
-          setIsLoading(false)
-        })
-      }
+      const slug = blogParam.replace(/\.md$/, '')
+      router.replace(`/blog/${slug}`)
     }
-  }, [])
+  }, [router])
 
-  const filteredBlogs = BLOG_LIST.filter((blog: BlogMeta) =>
+  const filteredBlogs = BLOG_LIST.filter((blog) =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const pinnedBlogs = filteredBlogs.filter(b => PINNED_FILENAMES.has(b.filename))
   const otherBlogs = filteredBlogs.filter(b => !PINNED_FILENAMES.has(b.filename))
-
-  const handleBlogSelect = async (blog: BlogMeta) => {
-    setIsLoading(true)
-    const blogId = blog.filename.replace('/blogs/', '').replace('.md', '')
-    const newUrl = `${window.location.pathname}?blog=${blogId}`
-    window.history.pushState({}, '', newUrl)
-    const loadedPost = await loadBlogContent(blog)
-    setSelectedPost(loadedPost)
-    setIsLoading(false)
-  }
-
-  const handleBackToList = () => {
-    setSelectedPost(null)
-    const newUrl = window.location.pathname
-    window.history.pushState({}, '', newUrl)
-  }
-
-  const handleShareBlog = async () => {
-    const currentUrl = window.location.href
-    try {
-      await navigator.clipboard.writeText(currentUrl)
-      alert('Blog URL copied to clipboard!')
-    } catch (err) {
-      alert(`Share this blog: ${currentUrl}`)
-    }
-  }
-
-
-  if (isLoading) {
-    return (
-      <div className="window">
-        <div className="window-title">Blog</div>
-        <div className="window-content active">
-          <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ color: '#666' }}>Loading...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (selectedPost) {
-    return (
-      <div className="window">
-        <div className="window-title">Blog - {selectedPost.title}</div>
-        <div className="window-content active">
-          <div className="stats-box" style={{ width: '100%', marginBottom: '15px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', flexShrink: 0 }}>
-              <button
-                onClick={handleBackToList}
-                style={{
-                  padding: '5px 10px',
-                  background: '#333',
-                  color: 'white',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                ← Back to Blog List
-              </button>
-              <button
-                onClick={handleShareBlog}
-                style={{
-                  padding: '5px 10px',
-                  background: '#007acc',
-                  color: 'white',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                📋 Share
-              </button>
-            </div>
-            <div
-              style={{
-                flex: 1,
-                overflowY: 'auto',
-                padding: '10px',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                backgroundColor: '#fafafa'
-              }}
-            >
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight]}
-                components={{
-                  h1: ({ children }) => <h1 style={{ margin: '10px 0 5px 0', fontSize: '18px' }}>{children}</h1>,
-                  h2: ({ children }) => <h2 style={{ margin: '10px 0 5px 0', fontSize: '16px' }}>{children}</h2>,
-                  h3: ({ children }) => <h3 style={{ margin: '10px 0 5px 0', fontSize: '14px' }}>{children}</h3>,
-                  p: ({ children }) => <p style={{ margin: '8px 0', lineHeight: '1.6' }}>{children}</p>,
-                  ul: ({ children }) => <ul style={{ margin: '5px 0', paddingLeft: '20px' }}>{children}</ul>,
-                  ol: ({ children }) => <ol style={{ margin: '5px 0', paddingLeft: '20px' }}>{children}</ol>,
-                  blockquote: ({ children }) => <blockquote style={{ margin: '10px 0', paddingLeft: '15px', borderLeft: '4px solid #ddd', color: '#666', fontStyle: 'italic' }}>{children}</blockquote>,
-                  code: ({ children, ...props }) =>
-                    <code style={{ background: '#f4f4f4', padding: '2px 4px', borderRadius: '3px', fontFamily: 'monospace', fontSize: '12px' }} {...props}>{children}</code>,
-                  pre: ({ children }) => <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '4px', margin: '10px 0', overflowX: 'auto' }}>{children}</pre>
-                }}
-              >
-                {selectedPost.content}
-              </ReactMarkdown>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="window">
@@ -195,24 +87,8 @@ export default function BlogPage() {
                     <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
                       Pinned
                     </div>
-                    {pinnedBlogs.map((blog, index) => (
-                      <div
-                        key={`pinned-${index}`}
-                        onClick={() => handleBlogSelect(blog)}
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'baseline',
-                          padding: '4px 0',
-                          cursor: 'pointer',
-                          borderBottom: '1px solid #eee',
-                        }}
-                      >
-                        <span style={{ fontSize: '14px' }}>* {blog.title}</span>
-                        <span style={{ fontSize: '11px', color: '#888', whiteSpace: 'nowrap', marginLeft: '12px' }}>
-                          {new Date(blog.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                        </span>
-                      </div>
+                    {pinnedBlogs.map((blog) => (
+                      <BlogRow key={`pinned-${blog.filename}`} blog={blog} pinned />
                     ))}
                   </div>
                 )}
@@ -221,24 +97,8 @@ export default function BlogPage() {
                   <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
                     All Posts
                   </div>
-                  {otherBlogs.map((blog, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleBlogSelect(blog)}
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'baseline',
-                        padding: '4px 0',
-                        cursor: 'pointer',
-                        borderBottom: '1px solid #eee',
-                      }}
-                    >
-                      <span style={{ fontSize: '14px' }}>{blog.title}</span>
-                      <span style={{ fontSize: '11px', color: '#888', whiteSpace: 'nowrap', marginLeft: '12px' }}>
-                        {new Date(blog.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                      </span>
-                    </div>
+                  {otherBlogs.map((blog) => (
+                    <BlogRow key={blog.filename} blog={blog} />
                   ))}
                 </div>
               </>
