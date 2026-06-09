@@ -53,7 +53,7 @@ export default function Sidebar({ side }: SidebarProps) {
         <div>resume.pdf</div>
       </div>
       <a
-        href="https://cal.com/ahat-rawjani"
+        href="https://cal.com/taharawjani"
         target="_blank"
         rel="noopener noreferrer"
         style={{ textDecoration: "none", color: "inherit" }}
