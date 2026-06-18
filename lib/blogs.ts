@@ -14,6 +14,11 @@ export interface BlogMeta {
 
 export const BLOG_LIST: BlogMeta[] = [
   {
+    title: 'college apps reflection',
+    filename: '/blogs/college-apps-reflection.md',
+    publishedDate: '2026-5-15'
+  },
+  {
     title: 'hop off the treadmill',
     filename: '/blogs/hedonic-treadmill.md',
     publishedDate: '2026-6-17'
