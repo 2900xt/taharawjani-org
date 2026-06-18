@@ -161,10 +161,10 @@ export default function Home() {
                   <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Mar 2025 - Jul 2025</span>
                 </li>
                 <li style={{ marginBottom: '8px' }}>
-                  <a href="https://www.academies-it.org/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    President @ ACL-IT
+                  <a href="https://www.engineering.upenn.edu/" style={{ color: '#0066cc', textDecoration: 'none' }}>
+                    CS @ Penn
                   </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Aug 2024 - Present</span>
+                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Aug 2026 - May 2029</span>
                 </li>
               </ul>
             </div>
@@ -212,6 +212,10 @@ export default function Home() {
             label="yt"
             url="https://youtube.com/@its-ahat"
           />
+          <ContactIcon
+            label="email"
+            url="mailto:tahar@seas.upenn.edu"
+          />
         </div>
       </div>
     </div>
@@ -223,14 +227,39 @@ function ContactIcon({
   label,
   url,
 }: {
-  icon: string;
+  icon?: string;
   label: string;
   url: string;
 }) {
+  const handleClick = () => {
+    if (url.startsWith("mailto:")) {
+      window.location.href = url;
+    } else {
+      window.open(url);
+    }
+  };
+
   return (
-    <div className="contact-icon" onClick={() => window.open(url)}>
+    <div className="contact-icon" onClick={handleClick}>
       <div className="icon small">
-        <Image src={icon} alt={label} width={16} height={16} />
+        {icon ? (
+          <Image src={icon} alt={label} width={16} height={16} />
+        ) : (
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+        )}
       </div>
       <span>{label}</span>
     </div>
