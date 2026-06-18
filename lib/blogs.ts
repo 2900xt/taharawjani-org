@@ -14,6 +14,11 @@ export interface BlogMeta {
 
 export const BLOG_LIST: BlogMeta[] = [
   {
+    title: 'hop off the treadmill',
+    filename: '/blogs/hedonic-treadmill.md',
+    publishedDate: '2026-6-17'
+  },
+  {
     title: 'what you had',
     filename: '/blogs/what-you-had.md',
     publishedDate: '2026-4-11'
@@ -77,8 +82,8 @@ export const BLOG_LIST: BlogMeta[] = [
 
 // Pinned blog filenames — add or remove your favorites here
 export const PINNED_FILENAMES = new Set([
+  '/blogs/hedonic-treadmill.md',
   '/blogs/noones-reading.md',
-  '/blogs/hypercompetition.md',
   '/blogs/meritocracy.md',
 ])
 

@@ -40,5 +40,3 @@ Asians are good at school. Why? Their culture cares deeply about education. I do
 Why don't we just like make the school start semesterly, or some teachers encourage learning more? Or be fairer and judge based on Potential? I know why. People don't understand the effects. Our intuition points to something this trivial having little effect on a kid's life. But, no, them being born in a different month or different family could very well be the differentiator between them being an IMO crackhead and a goon.
 
 It's the butterfly effect. Chaos does indeed also apply to the Game of Life. Who woulda thought?
-
-A cosmic ray caused a neuron to excite during a math test in 7th grade, you make it into advanced math, then get into a magnet school, then you join a club, be surrounded by tryhards, grind competitive math, then become an IMO crackhead, and then go off to MIT and live happily ever after.
