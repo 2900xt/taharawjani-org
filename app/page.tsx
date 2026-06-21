@@ -214,7 +214,7 @@ export default function Home() {
           />
           <ContactIcon
             label="email"
-            url="mailto:tahar@seas.upenn.edu"
+            url="mailto:tahar@engineering.upenn.edu"
           />
         </div>
       </div>
