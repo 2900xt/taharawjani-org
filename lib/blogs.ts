@@ -14,6 +14,11 @@ export interface BlogMeta {
 
 export const BLOG_LIST: BlogMeta[] = [
   {
+    title: 'Why Study CS?',
+    filename: '/blogs/cs-major.md',
+    publishedDate: '2026-7-6'
+  },
+  {
     title: 'college apps reflection',
     filename: '/blogs/college-apps-reflection.md',
     publishedDate: '2026-5-15'
