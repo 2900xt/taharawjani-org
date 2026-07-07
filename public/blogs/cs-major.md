@@ -1,8 +1,8 @@
 # Why I'm majoring in CS
 
-Coding is dead. Before I explain my choice of a CS major, we simply have to acknowledge this fact. Writing code manually is dead. I enjoyed it quite a bit, but it's dead. It is much better, in 99.99% of situations, to use AI Agents to write code.
+Coding is dead. I'm sorry. I loved writing code as much as the next guy, but it's genuinely gone. An AI agent is going to be MUCH more efficient than humans at writing code. And a big part of what CS teaches you is coding. But, what it also teaches you is problem solving.
 
-But, problem solving is NOT, and can NOT ever be dead. If humans aren't solving problems anymore, then all of human labor is already automated, at which point, nothing matters anymore. A CS Degree teaches this problem solving - whether it be proofs in discrete math, DSA, operating systems, etc. All of this lays the foundations at which technical problem solving can happen.
+Problem solving is NOT, and can NOT ever be dead. If humans aren't solving problems anymore, then all of human labor is already automated, at which point, nothing matters anymore. A CS Degree teaches this problem solving - whether it be proofs in discrete math, DSA, operating systems, etc. All of this lays the foundations at which technical problem solving can happen.
 
 But, to be honest, any CS-adjacent degree like Math, Statistics, Physics, CE, or even EE achieves this. But CS is, in my opinion, the easiest, leaving time for extracirriculars and work.
 
