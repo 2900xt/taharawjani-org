@@ -144,9 +144,9 @@ export default function Home() {
               <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: '8px' }}>
                   <a href="https://www.bluevigil.com/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    SWE @ Blue Vigil
+                   Embedded SWE @ Blue Vigil
                   </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Summer 2026</span>
+                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>May 2026 - July 2026</span>
                 </li>
                 <li style={{ marginBottom: '8px' }}>
                   <a href="https://maximus.com/" style={{ color: '#0066cc', textDecoration: 'none' }}>
