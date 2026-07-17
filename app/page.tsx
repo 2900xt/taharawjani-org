@@ -21,11 +21,11 @@ export default function Home() {
             </li>
             <li>
               built <a href="/isef_poster.pdf">3d printed buoys</a> that track endangered whales 
-              (<a href="https://agu.confex.com/agu/osm26/meetingapp.cgi/Paper/2009479/">OSM</a>, {" "}
+              (<a href="https://agu.confex.com/agu/osm26/meetingapp.cgi/Paper/2009479">OSM</a>, {" "}
               <a href="https://isef.net/project/robo046t-mobyglobal-a-real-time-whale-detection-network/">ISEF</a>)
             </li>
             <li>
-              made a <a href="">6502</a> breadboard computer with a debugger, i2c, and more
+              made a <a href="https://github.com/2900xt/6502">6502</a> breadboard computer with a debugger, i2c, and more
             </li>
             <li>
               programmed <a href="https://github.com/2900xt/neo-OS/">neo-OS</a> from scratch, 
