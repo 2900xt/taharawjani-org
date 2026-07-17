@@ -1,267 +1,60 @@
-'use client';
-
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import Terminal from "@/components/Terminal";
-
 export default function Home() {
-  const [activeTab, setActiveTab] = useState("processes");
-
-  const [cpuBars, setCpuBars] = useState<number[]>([]);
-  const [memoryBars, setMemoryBars] = useState<number[]>([]);
-  const [visualizerBars, setVisualizerBars] = useState<number[]>([]);
-  const [currentSong] = useState({
-    title: "BAILE INoLVIDABLE",
-    artist: "BAD BUNNY"
-  });
-
-  useEffect(() => {
-    const updateGauges = () => {
-      const newCpuBars = Array.from(
-        { length: 20 },
-        () => Math.random() * 80 + 20
-      );
-      const newMemoryBars = Array.from(
-        { length: 20 },
-        () => Math.random() * 80 + 20
-      );
-      setCpuBars(newCpuBars);
-      setMemoryBars(newMemoryBars);
-    };
-
-    updateGauges();
-    const interval = setInterval(updateGauges, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const updateVisualizer = () => {
-      const newBars = Array.from(
-        { length: 60 },
-        (_, i) => {
-          // Create a more musical pattern with bass (left), mids (center), highs (right)
-          const position = i / 60;
-          const bass = Math.sin(Date.now() / 200 + i * 0.1) * 40 + 50;
-          const mids = Math.sin(Date.now() / 150 + i * 0.2) * 30 + 40;
-          const highs = Math.sin(Date.now() / 100 + i * 0.3) * 20 + 30;
-
-          // Mix frequencies based on position
-          if (position < 0.33) return Math.max(20, bass + Math.random() * 20);
-          if (position < 0.66) return Math.max(20, mids + Math.random() * 20);
-          return Math.max(20, highs + Math.random() * 20);
-        }
-      );
-      setVisualizerBars(newBars);
-    };
-
-    updateVisualizer();
-    const interval = setInterval(updateVisualizer, 80);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="window">
-      <div className="window-title">Profiler - ahat</div>
-      <div className="tab-container">
-        <div
-          className={`tab ${activeTab === "processes" ? "active" : ""}`}
-          onClick={() => setActiveTab("processes")}
-        >
-          Processes
-        </div>
-        <div
-          className={`tab ${activeTab === "terminal" ? "active" : ""}`}
-          onClick={() => setActiveTab("terminal")}
-        >
-          Terminal
-        </div>
+    <main className="profile-window">
+      <div className="window-title">
+        <span>/dev/null</span>
+        <span className="window-controls" aria-hidden="true">
+          <i />
+          <i />
+        </span>
       </div>
+      <div className="profile-content">
+        <header className="intro">
+          <h1>hola! i&apos;m taha.</h1>
+          <p>rising freshman studying cs at penn.</p>
 
-      {activeTab === "processes" && (
-        <div className="window-content active">
-          <div className="stats-box" style={{ width: "100%", backgroundColor: "#1a1a1a", padding: "20px" }}>
-            {/* Now Playing Title */}
-            <div style={{
-              marginBottom: "15px",
-              textAlign: "center",
-              borderBottom: "1px solid #333",
-              paddingBottom: "10px"
-            }}>
-              <div style={{
-                fontSize: "11px",
-                color: "#888",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginBottom: "4px"
-              }}>
-                Now Playing
-              </div>
-              <div style={{
-                fontSize: "16px",
-                color: "#fff",
-                fontWeight: "600",
-                marginBottom: "2px"
-              }}>
-                {currentSong.title}
-              </div>
-              <div style={{
-                fontSize: "13px",
-                color: "#aaa"
-              }}>
-                {currentSong.artist}
-              </div>
-            </div>
+          <p>previously, i&apos;ve:</p>
+          <ul>
+            <li>
+              written embedded software for tethered drones at{" "}
+              <a href="https://www.bluevigil.com/">blue vigil</a>
+            </li>
+            <li>
+              built <a href="/isef_poster.pdf">3d printed buoys</a> that track endangered whales 
+              (<a href="https://agu.confex.com/agu/osm26/meetingapp.cgi/Paper/2009479/">OSM</a>, {" "}
+              <a href="https://isef.net/project/robo046t-mobyglobal-a-real-time-whale-detection-network/">ISEF</a>)
+            </li>
+            <li>
+              made a <a href="">6502</a> breadboard computer with a debugger, i2c, and more
+            </li>
+            <li>
+              programmed <a href="https://github.com/2900xt/neo-OS/">neo-OS</a> from scratch, 
+              and designed <a href="https://github.com/2900xt/tahaScript/">tahaScript</a> for it
+            </li>
+          </ul>
 
-            {/* Visualizer */}
-            <div style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-around",
-              height: "120px",
-              gap: "3px"
-            }}>
-              {visualizerBars.map((height, index) => (
-                <div
-                  key={index}
-                  style={{
-                    width: "8px",
-                    height: `${height}%`,
-                    backgroundColor: "#8b5cf6",
-                    borderRadius: "2px 2px 0 0",
-                    transition: "height 0.08s ease-out",
-                    boxShadow: "0 0 8px rgba(139, 92, 246, 0.5)"
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+          <p>i also used to do <a href="https://codeforces.com/profile/_ahat">competitive programming</a>.</p>
 
-          <div className="stats-container" style={{ marginTop: "15px" }}>
-            <div className="stats-box">
-              <div className="stats-title">Experience</div>
-              <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-                <li style={{ marginBottom: '8px' }}>
-                  <a href="https://www.bluevigil.com/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                   Embedded SWE @ Blue Vigil
-                  </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>May 2026 - July 2026</span>
-                </li>
-                <li style={{ marginBottom: '8px' }}>
-                  <a href="https://maximus.com/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    SWE Intern @ Maximus
-                  </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Jun 2025 - Aug 2025</span>
-                </li>
-                <li style={{ marginBottom: '8px' }}>
-                  <a href="https://blueprint.mov/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    SWE @ Blueprint
-                  </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Mar 2025 - Jul 2025</span>
-                </li>
-                <li style={{ marginBottom: '8px' }}>
-                  <a href="https://www.engineering.upenn.edu/" style={{ color: '#0066cc', textDecoration: 'none' }}>
-                    CS @ Penn
-                  </a>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '8px' }}>Aug 2026 - May 2029</span>
-                </li>
-              </ul>
-            </div>
-            <div className="stats-box">
-              <div className="stats-title">Fun Stats</div>
-              <div className="stats-row">
-                <div className="stats-label">CP Problems Solved</div>
-                <div>1500+</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Hackathon Wins</div>
-                <div>8</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">Spanish 1 Grade</div>
-                <div>B+</div>
-              </div>
-              <div className="stats-row">
-                <div className="stats-label">AI B2B SaaS?</div>
-                <div>:)</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+        </header>
 
-      {activeTab === "terminal" && <Terminal />}
+        <section aria-labelledby="writing-heading">
+          <h2 id="writing-heading">writing</h2>
+          <p>i occasionally <a href="https://substack.com/@taharawjani">rant</a> about life and philosophy :)</p>
+        </section>
 
-
-      {/* Contact Icons at bottom */}
-      <div className="contact-section">
-        <div className="contact-icons-row">
-          <ContactIcon
-            icon="/pictures/github.png"
-            label="github"
-            url="https://github.com/2900xt"
-          />
-          <ContactIcon
-            icon="/pictures/linkedin.png"
-            label="cringedin"
-            url="https://www.linkedin.com/in/taha-rawjani-08959a2a0/"
-          />
-          <ContactIcon
-            icon="/pictures/youtube.png"
-            label="yt"
-            url="https://youtube.com/@its-ahat"
-          />
-          <ContactIcon
-            label="email"
-            url="mailto:tahar@engineering.upenn.edu"
-          />
-        </div>
+        <footer>
+          <nav aria-label="Elsewhere">
+            <a href="https://github.com/2900xt">github</a>
+            <a href="https://www.linkedin.com/in/taha-rawjani-08959a2a0/">
+              linkedin
+            </a>
+            <a href="mailto:tahar@engineering.upenn.edu">email</a>
+            <a href="/resume.pdf">
+              resume
+            </a>
+          </nav>
+        </footer>
       </div>
-    </div>
-  );
-}
-
-function ContactIcon({
-  icon,
-  label,
-  url,
-}: {
-  icon?: string;
-  label: string;
-  url: string;
-}) {
-  const handleClick = () => {
-    if (url.startsWith("mailto:")) {
-      window.location.href = url;
-    } else {
-      window.open(url);
-    }
-  };
-
-  return (
-    <div className="contact-icon" onClick={handleClick}>
-      <div className="icon small">
-        {icon ? (
-          <Image src={icon} alt={label} width={16} height={16} />
-        ) : (
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-          </svg>
-        )}
-      </div>
-      <span>{label}</span>
-    </div>
+    </main>
   );
 }

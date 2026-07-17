@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '@/lib/blogs'
+
+const SITE_URL = 'https://taharawjani.org'
 
 export default function robots(): MetadataRoute.Robots {
   return {
