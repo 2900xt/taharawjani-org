@@ -1,0 +1,14 @@
+# Taha Rawjani
+
+> Personal website for Taha Rawjani, a computer science student at the University of Pennsylvania.
+
+Taha has written embedded software for tethered drones at Blue Vigil; built 3D-printed buoys for real-time endangered-whale detection; built a 6502 breadboard computer; programmed neo-OS; and designed tahaScript.
+
+## Primary links
+
+- [Homepage](https://taharawjani.org/)
+- [GitHub](https://github.com/2900xt)
+- [LinkedIn](https://www.linkedin.com/in/taha-rawjani-08959a2a0/)
+- [Writing](https://substack.com/@taharawjani)
+- [Resume](https://taharawjani.org/resume.pdf)
+- [Whale detection poster](https://taharawjani.org/isef_poster.pdf)
