@@ -12,6 +12,7 @@ const staticFiles = [
   "robots.txt",
   "sitemap.xml",
   "llms.txt",
+  "tr.png",
 ];
 
 await rm(outputDirectory, { recursive: true, force: true });
