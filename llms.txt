@@ -9,6 +9,6 @@ Taha has written embedded software for tethered drones at Blue Vigil; built 3D-p
 - [Homepage](https://taharawjani.org/)
 - [GitHub](https://github.com/2900xt)
 - [LinkedIn](https://www.linkedin.com/in/taha-rawjani-08959a2a0/)
-- [Writing](https://substack.com/@taharawjani)
+- [Writing](https://taharawjani.org/writing)
 - [Resume](https://taharawjani.org/resume.pdf)
 - [Whale detection poster](https://taharawjani.org/isef_poster.pdf)

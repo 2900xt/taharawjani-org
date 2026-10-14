@@ -3,6 +3,7 @@ import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadPosts, renderIndex, renderPost } from "./writing.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const port = Number.parseInt(process.env.PORT ?? "3000", 10);
@@ -12,13 +13,30 @@ const contentTypes = {
   ".ico": "image/x-icon",
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
+  ".jpg": "image/jpeg",
   ".pdf": "application/pdf",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
   ".txt": "text/plain; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
 };
 
+async function renderWriting(pathname) {
+  const route = pathname.replace(/\.html$/, "").replace(/\/$/, "");
+  if (route === "/writing") return renderIndex(await loadPosts());
+  const post = (await loadPosts()).find((entry) => `/writing/${entry.slug}` === route);
+  return post && renderPost(post);
+}
+
 createServer(async (request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
+  const writingPage = await renderWriting(pathname);
+  if (writingPage) {
+    response.writeHead(200, { "Content-Type": contentTypes[".html"] });
+    response.end(request.method === "HEAD" ? undefined : writingPage);
+    return;
+  }
+
   const requestedFile = pathname === "/" ? "index.html" : pathname.slice(1);
   const safePath = normalize(requestedFile).replace(/^(\.\.(\/|\\|$))+/, "");
   const filePath = join(root, safePath);

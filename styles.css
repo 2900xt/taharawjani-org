@@ -180,6 +180,24 @@ section { margin-top: 36px; }
 footer { border-top: 1px solid #c9c5cb; margin-top: 36px; padding-top: 18px; }
 footer nav { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 
+.breadcrumb { color: var(--muted); font-size: 17px; margin-bottom: 28px; }
+.post-date { color: var(--muted); font-size: 17px; margin-bottom: 28px; }
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list li { display: flex; gap: 16px; justify-content: space-between; margin-bottom: 8px; }
+.post-list time { color: var(--muted); flex-shrink: 0; }
+.post h1 { margin-bottom: 8px; }
+.post-subtitle { color: #4a4552; font-size: 22px; margin-bottom: 4px; }
+.post h2 { margin-top: 32px; }
+.post h3, .post h4 { font-size: 22px; font-weight: 400; margin: 24px 0 8px; }
+.post ul, .post ol { margin: 0 0 12px; padding-left: 26px; }
+.post li { margin-bottom: 4px; }
+.post blockquote { border-left: 3px solid var(--purple); color: #4a4552; margin: 0 0 12px; padding: 2px 0 2px 16px; }
+.post hr { border: 0; border-top: 1px dashed #c9c5cb; margin: 28px 0; }
+.post img { border: 2px solid #000; display: block; height: auto; margin: 16px 0; max-width: 100%; }
+.post code { background: #ebe8f2; font-family: inherit; padding: 0 4px; }
+.post pre { background: #15131a; color: #e6e1ee; margin: 0 0 12px; overflow-x: auto; padding: 12px 14px; }
+.post pre code { background: none; padding: 0; }
+
 @media (max-width: 600px) {
   body { font-size: 19px; }
   .desktop { padding: 52px 12px 24px; }
