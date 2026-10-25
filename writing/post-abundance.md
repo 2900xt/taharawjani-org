@@ -15,3 +15,5 @@ Will social structure become fixed post-abundance? Will there be mobility? Perfe
 # At the end of the day
 
 It's night. Nobody f*cking knows what's gonna happen. It's an exciting time to be alive, yes. But, I fear that we as a society aren't really getting ready for the insane intelligence explosion that is about to happen this year. I guess we're just gonna have to go with the flow.
+
+So many questions. So little answers. Such *indefinite optimism*.
