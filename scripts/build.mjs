@@ -12,6 +12,7 @@ const staticFiles = [
   "sitemap.xml",
   "llms.txt",
   "tr.png",
+  "saast-supper.jpg",
 ];
 
 await rm(outputDirectory, { recursive: true, force: true });
