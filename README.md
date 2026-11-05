@@ -1,6 +1,6 @@
 # taharawjani.org
 
-A dependency-free static HTML, CSS, and JavaScript site with a Markdown blog.
+A dependency-free static HTML site with a Markdown blog.
 
 ## Development
 
@@ -24,6 +24,6 @@ draft: true
 ---
 ```
 
-They are rendered into the homepage's window template at `/writing/<slug>`,
+They are rendered into the homepage's template at `/writing/<slug>`,
 with an index at `/writing`. `npm run dev` renders them on each request;
 `npm run build` writes them to `dist/`. Drafts are skipped.

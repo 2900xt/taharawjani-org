@@ -5,8 +5,6 @@ const outputDirectory = new URL("../dist/", import.meta.url);
 const rootDirectory = new URL("../", import.meta.url);
 const staticFiles = [
   "index.html",
-  "styles.css",
-  "script.js",
   "favicon.ico",
   "resume.pdf",
   "isef_poster.pdf",

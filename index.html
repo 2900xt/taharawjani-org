@@ -6,10 +6,13 @@
     <title>ahat.</title>
     <meta name="description" content=":D ~ ahat.">
     <meta name="author" content="Taha Rawjani">
-    <meta name="theme-color" content="#34206f">
     <link rel="canonical" href="https://taharawjani.org/">
     <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="stylesheet" href="/styles.css">
+    <style>
+      body { max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.5; }
+      img, pre { max-width: 100%; }
+      pre { overflow-x: auto; }
+    </style>
     <meta property="og:type" content="website">
     <meta property="og:title" content="ahat.">
     <meta property="og:description" content=":D ~ ahat.">
@@ -32,92 +35,48 @@
         ]
       }
     </script>
-    <script defer src="/script.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
-    <div class="desktop">
-      <nav class="menu-bar" aria-label="Site menu">
-        <strong>ahat</strong>
-        <span aria-hidden="true">home&nbsp;&nbsp;file&nbsp;&nbsp;view</span>
-        <div class="menu-right">
-          <span class="menu-status-icon" aria-hidden="true"><i></i></span>
-          <a
-            class="topbar-player"
-            href="https://open.spotify.com/track/6jfdBc7Vma7hZ6ytt2lZF8?si=cf617826eaac4193"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span class="topbar-track">reflection eternal (nujabes)</span>
-            <span class="topbar-cava" aria-hidden="true">
-              <i style="height: 57%"></i><i style="height: 77%"></i>
-              <i style="height: 91%"></i><i style="height: 96%"></i>
-              <i style="height: 91%"></i><i style="height: 79%"></i>
-              <i style="height: 65%"></i><i style="height: 56%"></i>
-              <i style="height: 55%"></i><i style="height: 61%"></i>
-              <i style="height: 68%"></i><i style="height: 68%"></i>
-              <i style="height: 59%"></i><i style="height: 42%"></i>
-              <i style="height: 25%"></i><i style="height: 18%"></i>
-              <i style="height: 26%"></i><i style="height: 47%"></i>
-              <i style="height: 70%"></i><i style="height: 88%"></i>
-              <i style="height: 94%"></i><i style="height: 87%"></i>
-              <i style="height: 70%"></i><i style="height: 50%"></i>
-            </span>
-          </a>
-        </div>
-      </nav>
+    <main>
+      <header>
+        <h1>Taha Rawjani</h1>
 
-      <main class="profile-window">
-        <div class="window-title">
-          <span>/dev/ahat</span>
-          <span class="window-controls" aria-hidden="true"><i></i><i></i></span>
-        </div>
+	<p>currently, i'm building autonomous factories with <a href="https://ardentech.ai">arden</a></p>
 
-        <div class="profile-content">
-          <header class="intro">
-            <h1>hola! i'm taha.</h1>
-            <p>"and i wonder if you know what it all really means?"</p>
-            <p>previously, i've:</p>
-            <ul>
-              <li>
-                studied cs, <a href="https://pennaerial.com">built airplanes</a>, and <a href="https://pennlabs.org/team/tahar">brewed potions</a> at penn
-              </li>
-              <li>
-                written firmware for construction drones at
-                <a href="https://www.bluevigil.com/">blue vigil</a>
-              </li>
-              <li>
-                built buoys that track endangered whales
-                (<a href="https://www.davidsongifted.org/gifted-programs/fellows-scholarship/fellows/current-and-past-fellows/2026-fellows/fellow-matthew-li-taha-rawjani/">davidson</a>,
-                <a href="https://isef.net/project/robo046t-mobyglobal-a-real-time-whale-detection-network/">ISEF</a>)
-              </li>
-              <li>
-                wrote <a href="https://github.com/2900xt/neo-OS/">neo-OS</a> and built a breadboard <a href="https://github.com/2900xt/6502">6502</a> computer for fun
-              </li>
-            </ul>
-            <p>
-              i also used to do
-              <a href="https://codeforces.com/profile/_ahat">competitive programming</a>.
-            </p>
-          </header>
+        <p>previously, i've:</p>
+        <ul>
+          <li>
+            studied cs and <a href="https://pennlabs.org/team/tahar">brewed potions</a> at the university of pennsylvania
+          </li>
+          <li>
+            left high school early to write firmware for <a href="https://www.bluevigil.com/">blue vigil</a>
+          </li>
+          <li>
+		  been recognized by <a href="https://isef.net/project/robo046t-mobyglobal-a-real-time-whale-detection-network/">davidson fellows</a>, <a href="https://www.govinfo.gov/app/details/CRI-2025/CRI-2025-RAWJANI-TAHA">congress</a>, and at <a href="https://isef.net/project/robo046t-mobyglobal-a-real-time-whale-detection-network/">ISEF</a>  
+          </li>
+          <li>
+            wrote <a href="https://github.com/2900xt/neo-OS/">neo-OS</a> and built a breadboard <a href="https://github.com/2900xt/6502">6502</a> computer at 14
+          </li>
+        </ul>
+      </header>
 
-          <section aria-labelledby="writing-heading">
-            <h2 id="writing-heading">writing</h2>
-            <p>
-              i occasionally <a href="/writing">rant</a>
-              about life and philosophy :)
-            </p>
-          </section>
+      <section aria-labelledby="writing-heading">
+        <h2 id="writing-heading">writing</h2>
+        <p>
+          i occasionally <a href="/writing">rant</a>
+          about life and philosophy :)
+        </p>
+      </section>
 
-          <footer>
-            <nav aria-label="Elsewhere">
-              <a href="https://github.com/2900xt">github</a>
-              <a href="https://www.linkedin.com/in/taha-rawjani-08959a2a0/">linkedin</a>
-              <a href="mailto:tahar@engineering.upenn.edu">email</a>
-            </nav>
-          </footer>
-        </div>
-      </main>
-    </div>
+      <footer>
+        <p>
+          <a href="https://github.com/2900xt">github</a> /
+          <a href="https://www.linkedin.com/in/taha-rawjani-08959a2a0/">linkedin</a> /
+          <a href="mailto:tahar@engineering.upenn.edu">email</a> /
+	  <a href="https://codeforces.com/profile/_ahat">codeforces</a>
+        </p>
+      </footer>
+    </main>
   </body>
 </html>

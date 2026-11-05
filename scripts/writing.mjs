@@ -1,8 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import { parseFrontmatter, renderMarkdown } from "./markdown.mjs";
 
-// Posts live in writing/<slug>.md and are rendered into the same window chrome as
-// the homepage. index.html is the template, so the menu bar and head stay in sync.
+// Posts live in writing/<slug>.md. index.html is the template, so the head stays in sync.
 
 const root = new URL("../", import.meta.url);
 const postsDirectory = new URL("writing/", root);
@@ -39,7 +38,7 @@ export async function loadPosts() {
   return posts.filter((post) => !post.draft).sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
 }
 
-async function renderPage({ title, description, path, windowTitle, content }) {
+async function renderPage({ title, description, path, content }) {
   const template = await readFile(new URL("index.html", root), "utf8");
   const url = `${siteUrl}${path}`;
 
@@ -55,17 +54,10 @@ async function renderPage({ title, description, path, windowTitle, content }) {
     .replace(/(<link rel="canonical" href=")[^"]*"/, set(url))
     .replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/, "")
     .replace(
-      /<main class="profile-window">[\s\S]*<\/main>/,
-      () => `<main class="profile-window">
-        <div class="window-title">
-          <span>${escapeHtml(windowTitle)}</span>
-          <span class="window-controls" aria-hidden="true"><i></i><i></i></span>
-        </div>
-
-        <div class="profile-content">
+      /<main>[\s\S]*<\/main>/,
+      () => `<main>
 ${content}
-        </div>
-      </main>`,
+    </main>`,
     );
 }
 
@@ -74,13 +66,12 @@ export async function renderPost(post) {
     title: `${post.title} ~ ahat.`,
     description: post.description || post.subtitle || post.title,
     path: `/writing/${post.slug}`,
-    windowTitle: `~/writing/${post.slug}.md`,
-    content: `          <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">home</a> / <a href="/writing">writing</a></nav>
-          <article class="post">
+    content: `          <p><a href="/">home</a> / <a href="/writing">writing</a></p>
+          <article>
             <header>
               <h1>${escapeHtml(post.title)}</h1>
-              ${post.subtitle ? `<p class="post-subtitle">${escapeHtml(post.subtitle)}</p>` : ""}
-              ${post.date ? `<p class="post-date"><time datetime="${escapeHtml(post.date)}">${formatDate(post.date)}</time></p>` : ""}
+              ${post.subtitle ? `<p>${escapeHtml(post.subtitle)}</p>` : ""}
+              ${post.date ? `<p><time datetime="${escapeHtml(post.date)}">${formatDate(post.date)}</time></p>` : ""}
             </header>
 ${renderMarkdown(post.body)}
           </article>`,
@@ -91,8 +82,7 @@ export async function renderIndex(posts) {
   const items = posts
     .map(
       (post) => `            <li>
-              <a href="/writing/${post.slug}">${escapeHtml(post.title)}</a>
-              ${post.date ? `<time datetime="${escapeHtml(post.date)}">${formatDate(post.date)}</time>` : ""}
+              <a href="/writing/${post.slug}">${escapeHtml(post.title)}</a>${post.date ? ` - <time datetime="${escapeHtml(post.date)}">${formatDate(post.date)}</time>` : ""}
             </li>`,
     )
     .join("\n");
@@ -101,9 +91,8 @@ export async function renderIndex(posts) {
     title: "writing ~ ahat.",
     description: "writing ~ ahat.",
     path: "/writing",
-    windowTitle: "~/writing",
-    content: `          <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">home</a> / writing</nav>
+    content: `          <p><a href="/">home</a></p>
           <h1>writing</h1>
-          ${posts.length ? `<ul class="post-list">\n${items}\n          </ul>` : "<p>nothing here yet.</p>"}`,
+          ${posts.length ? `<ul>\n${items}\n          </ul>` : "<p>nothing here yet.</p>"}`,
   });
 }
